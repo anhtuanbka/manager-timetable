@@ -50,8 +50,8 @@ public class ConnectionManager {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             //System.out.println("jdbc:sqlserver://"+props[0]+"\\"+props[1]+":"+props[2]+";username="+props[3]+";password="+props[4]+";databasename="+props[5]);
-            //conn = DriverManager.getConnection("jdbc:sqlserver://"+props[0]+"\\"+props[1]+":"+props[2]+";username="+props[3]+";password="+props[4]+";databasename="+props[5]);
-            conn=DriverManager.getConnection("jdbc:sqlserver://localhost\\mypc:61499;databasename=Project", "admin", "admin");
+            conn = DriverManager.getConnection("jdbc:sqlserver://"+props[0]+"\\"+props[1]+":"+props[2]+";username="+props[3]+";password="+props[4]+";databasename="+props[5]);
+//            conn=DriverManager.getConnection("jdbc:sqlserver://localhost\\VuDucCanh:1433;databasename=Project", "sa", "1234567");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
