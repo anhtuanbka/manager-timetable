@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
 
 /**
@@ -11,6 +10,7 @@ package model;
  * @author VuDucCanh
  */
 public class User {
+
     private String ID;
     private String USERNAME;
     private String PASSWORD;
@@ -87,5 +87,5 @@ public class User {
     public boolean isADMIN() {
         return ADMIN;
     }
-    
+
 }
