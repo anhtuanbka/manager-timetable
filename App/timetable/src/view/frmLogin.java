@@ -6,6 +6,7 @@
 
 package view;
 
+import control.select.CheckLogin;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -60,6 +61,11 @@ public class frmLogin extends javax.swing.JFrame {
 
         btnLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnReset.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnReset.setText("Reset");
@@ -138,6 +144,14 @@ public class frmLogin extends javax.swing.JFrame {
         txtUserName.setText("");
         txtPassword.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        if(CheckLogin.check(txtUserName.getText(), new String(txtPassword.getPassword()))){
+            frmMain frmMainForm = new frmMain();
+            frmMainForm.setVisible(true);
+            this.setVisible(false);
+        };
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments

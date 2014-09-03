@@ -38,7 +38,6 @@ public class frmConfigConnection extends javax.swing.JFrame {
         try {
             String line;
             File f = new File("connection.txt");
-            if(f==null) return;
             bf = new BufferedReader(new FileReader(f));
             line = bf.readLine();
             String[] props = line.split(",");
@@ -48,6 +47,8 @@ public class frmConfigConnection extends javax.swing.JFrame {
             txtUserName.setText(props[3]);
             txtPassword.setText(props[4]);
             txtDatabaseName.setText(props[5]);
+            
+            
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Cannot load the connection settings");
         } catch (IOException ex) {
