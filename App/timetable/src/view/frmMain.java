@@ -19,6 +19,9 @@ public class frmMain extends javax.swing.JFrame {
      */
     public frmMain() {
         initComponents();
+        //
+        RoomPanel rp = new RoomPanel();
+        pnlRoom.add(rp);
     }
 
     /**
@@ -31,10 +34,10 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         tbnPanel = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        pnlRoom = new javax.swing.JPanel();
+        pnlSubject = new javax.swing.JPanel();
+        pnlTimetable = new javax.swing.JPanel();
+        ProfilePanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -42,57 +45,57 @@ public class frmMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlRoomLayout = new javax.swing.GroupLayout(pnlRoom);
+        pnlRoom.setLayout(pnlRoomLayout);
+        pnlRoomLayout.setHorizontalGroup(
+            pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 599, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlRoomLayout.setVerticalGroup(
+            pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 411, Short.MAX_VALUE)
         );
 
-        tbnPanel.addTab("ROOM", jPanel1);
+        tbnPanel.addTab("ROOM", pnlRoom);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlSubjectLayout = new javax.swing.GroupLayout(pnlSubject);
+        pnlSubject.setLayout(pnlSubjectLayout);
+        pnlSubjectLayout.setHorizontalGroup(
+            pnlSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 599, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlSubjectLayout.setVerticalGroup(
+            pnlSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 411, Short.MAX_VALUE)
         );
 
-        tbnPanel.addTab("SUBJECT", jPanel2);
+        tbnPanel.addTab("SUBJECT", pnlSubject);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlTimetableLayout = new javax.swing.GroupLayout(pnlTimetable);
+        pnlTimetable.setLayout(pnlTimetableLayout);
+        pnlTimetableLayout.setHorizontalGroup(
+            pnlTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 599, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlTimetableLayout.setVerticalGroup(
+            pnlTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 411, Short.MAX_VALUE)
         );
 
-        tbnPanel.addTab("TIMETABLE", jPanel3);
+        tbnPanel.addTab("TIMETABLE", pnlTimetable);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ProfilePanelLayout = new javax.swing.GroupLayout(ProfilePanel);
+        ProfilePanel.setLayout(ProfilePanelLayout);
+        ProfilePanelLayout.setHorizontalGroup(
+            ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 599, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ProfilePanelLayout.setVerticalGroup(
+            ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 411, Short.MAX_VALUE)
         );
 
-        tbnPanel.addTab("Profile", jPanel4);
+        tbnPanel.addTab("Profile", ProfilePanel);
 
         jMenu1.setText("System");
 
@@ -165,14 +168,14 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ProfilePanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel pnlRoom;
+    private javax.swing.JPanel pnlSubject;
+    private javax.swing.JPanel pnlTimetable;
     private javax.swing.JTabbedPane tbnPanel;
     // End of variables declaration//GEN-END:variables
 }
