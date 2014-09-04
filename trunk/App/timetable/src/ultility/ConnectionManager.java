@@ -57,7 +57,7 @@ public class ConnectionManager {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Ok");
+//        System.out.println("Ok");
         return conn;
     }
     
@@ -78,7 +78,7 @@ public class ConnectionManager {
             Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args) {
-        getConnection();
-    }
+//    public static void main(String[] args) {
+//        getConnection();
+//    }
 }

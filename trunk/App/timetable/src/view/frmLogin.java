@@ -9,6 +9,7 @@ package view;
 import control.select.CheckLogin;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -150,7 +151,9 @@ public class frmLogin extends javax.swing.JFrame {
             frmMain frmMainForm = new frmMain();
             frmMainForm.setVisible(true);
             this.setVisible(false);
-        };
+        }else{
+            JOptionPane.showMessageDialog(this, "Login failed!");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

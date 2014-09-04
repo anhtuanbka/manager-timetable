@@ -1,1 +1,1 @@
-localhost,VuDucCanh,1433,sa,1234567,Project
+localhost,mypc,1433,sa,1234567,Project
