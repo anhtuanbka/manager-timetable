@@ -14,7 +14,7 @@ public class TimeTable {
     private int TIME_ID;
     private String SUBJECT_ID;
     private String SUBJECT_NAME;
-    private int MAX_STUDENT;
+    private int MAX_STUDENTS;
     private int REGISTED;
 
     public TimeTable() {
@@ -24,7 +24,7 @@ public class TimeTable {
         this.TIME_ID = TIME_ID;
         this.SUBJECT_ID = SUBJECT_ID;
         this.SUBJECT_NAME = SUBJECT_NAME;
-        this.MAX_STUDENT = MAX_STUDENT;
+        this.MAX_STUDENTS = MAX_STUDENTS;
         this.REGISTED = REGISTED;
     }
 
@@ -40,8 +40,8 @@ public class TimeTable {
         this.SUBJECT_NAME = SUBJECT_NAME;
     }
 
-    public void setMAX_STUDENT(int MAX_STUDENT) {
-        this.MAX_STUDENT = MAX_STUDENT;
+    public void setMAX_STUDENTS(int MAX_STUDENTS) {
+        this.MAX_STUDENTS = MAX_STUDENTS;
     }
 
     public void setREGISTED(int REGISTED) {
@@ -60,8 +60,8 @@ public class TimeTable {
         return SUBJECT_NAME;
     }
 
-    public int getMAX_STUDENT() {
-        return MAX_STUDENT;
+    public int getMAX_STUDENTS() {
+        return MAX_STUDENTS;
     }
 
     public int getREGISTED() {
