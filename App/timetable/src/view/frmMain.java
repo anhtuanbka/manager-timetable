@@ -20,8 +20,16 @@ public class frmMain extends javax.swing.JFrame {
     public frmMain() {
         initComponents();
         //
-        RoomPanel rp = new RoomPanel();
-        pnlRoom.add(rp);
+        PanelRoom pnr = new PanelRoom();
+        tbnPanel.addTab("ROOM", pnr);
+        
+        PanelSubject pns = new PanelSubject();
+        tbnPanel.addTab("SUBJECT", pns);
+        
+        PanelTimeTable pntt = new PanelTimeTable();
+        tbnPanel.addTab("TIME TABLE", pntt);
+        
+        
     }
 
     /**
@@ -34,68 +42,12 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         tbnPanel = new javax.swing.JTabbedPane();
-        pnlRoom = new javax.swing.JPanel();
-        pnlSubject = new javax.swing.JPanel();
-        pnlTimetable = new javax.swing.JPanel();
-        ProfilePanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout pnlRoomLayout = new javax.swing.GroupLayout(pnlRoom);
-        pnlRoom.setLayout(pnlRoomLayout);
-        pnlRoomLayout.setHorizontalGroup(
-            pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-        pnlRoomLayout.setVerticalGroup(
-            pnlRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
-        );
-
-        tbnPanel.addTab("ROOM", pnlRoom);
-
-        javax.swing.GroupLayout pnlSubjectLayout = new javax.swing.GroupLayout(pnlSubject);
-        pnlSubject.setLayout(pnlSubjectLayout);
-        pnlSubjectLayout.setHorizontalGroup(
-            pnlSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-        pnlSubjectLayout.setVerticalGroup(
-            pnlSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
-        );
-
-        tbnPanel.addTab("SUBJECT", pnlSubject);
-
-        javax.swing.GroupLayout pnlTimetableLayout = new javax.swing.GroupLayout(pnlTimetable);
-        pnlTimetable.setLayout(pnlTimetableLayout);
-        pnlTimetableLayout.setHorizontalGroup(
-            pnlTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-        pnlTimetableLayout.setVerticalGroup(
-            pnlTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
-        );
-
-        tbnPanel.addTab("TIMETABLE", pnlTimetable);
-
-        javax.swing.GroupLayout ProfilePanelLayout = new javax.swing.GroupLayout(ProfilePanel);
-        ProfilePanel.setLayout(ProfilePanelLayout);
-        ProfilePanelLayout.setHorizontalGroup(
-            ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 599, Short.MAX_VALUE)
-        );
-        ProfilePanelLayout.setVerticalGroup(
-            ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 411, Short.MAX_VALUE)
-        );
-
-        tbnPanel.addTab("Profile", ProfilePanel);
 
         jMenu1.setText("System");
 
@@ -118,11 +70,11 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbnPanel)
+            .addComponent(tbnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbnPanel)
+            .addComponent(tbnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
 
         pack();
@@ -168,14 +120,10 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ProfilePanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel pnlRoom;
-    private javax.swing.JPanel pnlSubject;
-    private javax.swing.JPanel pnlTimetable;
     private javax.swing.JTabbedPane tbnPanel;
     // End of variables declaration//GEN-END:variables
 }
