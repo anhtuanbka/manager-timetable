@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class SelectallSubject {
 
-    public List<Subject> SelectSubject() throws SQLException {
+    public static List<Subject> SelectSubject() throws SQLException {
         List<Subject> SubjectsList = new ArrayList<>();
         String sql = "SELECT * FROM SUBJECTS";
         try {
