@@ -28,41 +28,7 @@ public class PanelRoom extends javax.swing.JPanel {
     DefaultTableModel dtbm = new DefaultTableModel();
     public PanelRoom() {
         initComponents();
-       LoadTable();
-    }
-       /* private void loadTable(List<Leave> listLeave) throws SQLException {
-        mtableLeave.getDataVector().clear();
-        for (Leave leave : listLeave) {
-            Vector v = new Vector();
-            v.add(leave.getId());
-            v.add(empManager.getEmployeebyId(leave.getApproverId()).getEname());
-            v.add(leave.getFrom());
-            v.add(leave.getTo());
-            v.add(setStrStatus(leave.getStatus()));
-            mtableLeave.addRow(v);
-        }
-
-    }*/
-    public  void LoadTable()
-    {
-         List<Subject> list = new ArrayList<>();
-        dtbm.addColumn("SUBJECT_Name");
-        dtbm.addColumn("SUBJECT_ID"); 
-        dtbm.addColumn("MAster");
-        try {
-            list = SelectallSubject.SelectSubject();
-            for (Subject subject : list) {
-                Vector v = new Vector();
-                v.add(subject.getSUBJECT_NAME());
-                v.add(subject.getSUBJECT_ID());
-                v.add(subject.getMASTER_SUBJECT());
-                dtbm.addRow(v);
-            }
-           jTable1.setModel(dtbm);
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,6 +84,8 @@ public class PanelRoom extends javax.swing.JPanel {
 
         jScrollPane2.getAccessibleContext().setAccessibleParent(jScrollPane2);
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 255))); // NOI18N
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Search By");
 
@@ -144,17 +112,15 @@ public class PanelRoom extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(btSearch)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(btSearch)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -175,7 +141,7 @@ public class PanelRoom extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName(" Room List");
