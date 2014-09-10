@@ -5,7 +5,9 @@
         <group>
             <file>file:/D:/Project/App/timetable/src/control/select/SelectallTimeRoom.java</file>
             <file>file:/D:/Project/App/timetable/src/view/frmMain.java</file>
+            <file>file:/D:/Project/App/timetable/src/view/PanelSubject.java</file>
             <file>file:/D:/Project/App/timetable/src/view/PanelRoom.java</file>
+            <file>file:/D:/Project/App/timetable/src/model/TimeRoom.java</file>
             <file>file:/D:/Project/App/timetable/src/model/Subject.java</file>
         </group>
     </open-files>
