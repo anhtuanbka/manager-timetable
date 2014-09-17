@@ -19,6 +19,10 @@ public class frmMain extends javax.swing.JFrame {
      */
     public frmMain() {
         initComponents();
+        initTabPanel();   
+    }
+
+    private void initTabPanel() {
         //
         PanelRoom pnr = new PanelRoom();
         tbnPanel.addTab("ROOM", pnr);
@@ -28,8 +32,6 @@ public class frmMain extends javax.swing.JFrame {
         
         PanelTimeTable pntt = new PanelTimeTable();
         tbnPanel.addTab("TIME TABLE", pntt);
-        
-        
     }
 
     /**
@@ -41,6 +43,7 @@ public class frmMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         tbnPanel = new javax.swing.JTabbedPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -124,6 +127,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane tbnPanel;
     // End of variables declaration//GEN-END:variables
 }
