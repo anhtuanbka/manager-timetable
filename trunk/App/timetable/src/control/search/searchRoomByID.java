@@ -29,8 +29,14 @@ public class searchRoomByID {
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-        }
-        return null;
+            Room room = new Room();
+            room.setROOM_ID(rs.getString("ROOM_ID"));
+            room.setSTATUS(rs.getBoolean("STATUS"));
+            room.setTYPE_ID(rs.getString("TYPE_ID"));
+            RoomList.add(room);
+
 
     }
+                return RoomList;
+}
 }
