@@ -6,7 +6,7 @@
 
 package view;
 
-import control.select.SelectallSubject;
+import control.select.SelectallRooms;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import model.Subject;
+import model.Room;
 
 /**
  *
@@ -28,6 +28,7 @@ public class PanelRoom extends javax.swing.JPanel {
     DefaultTableModel dtbm = new DefaultTableModel();
     public PanelRoom() {
         initComponents();
+        LoadTable();
     }  
 
     /**
@@ -77,7 +78,7 @@ public class PanelRoom extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -147,7 +148,27 @@ public class PanelRoom extends javax.swing.JPanel {
         jPanel1.getAccessibleContext().setAccessibleName(" Room List");
         jPanel1.getAccessibleContext().setAccessibleParent(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
-
+    public  void LoadTable()
+    {
+        List<Room> list = new ArrayList<>();
+        
+        dtbm.addColumn("ROOM_ID");
+        dtbm.addColumn("TYPE_ID"); 
+        dtbm.addColumn("Status");
+        try {
+            list = SelectallRooms.SelectallRooms();
+            for (Room room : list) {
+                Vector v = new Vector();
+                v.add((room.getROOM_ID()));
+                v.add(room.getTYPE_ID());
+                v.add(room.isSTATUS());
+                dtbm.addRow(v);
+            }
+           jTable1.setModel(dtbm);
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSearch;
