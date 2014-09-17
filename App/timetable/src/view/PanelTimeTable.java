@@ -5,7 +5,16 @@
  */
 
 package view;
-
+import control.select.SelectallTimeTable;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.TimeTable;
 /**
  *
  * @author VuDucCanh
@@ -15,8 +24,10 @@ public class PanelTimeTable extends javax.swing.JPanel {
     /**
      * Creates new form PanelTimeTable
      */
+    DefaultTableModel dtbm = new DefaultTableModel();
     public PanelTimeTable() {
         initComponents();
+        LoadTable();
     }
 
     /**
@@ -39,7 +50,31 @@ public class PanelTimeTable extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    public  void LoadTable()
+    {
+        List<TimeTable> list = new ArrayList<>();
+        
+        dtbm.addColumn("SUBJECT_ID");
+        dtbm.addColumn("SUBJECT_NAME"); 
+        dtbm.addColumn("MAX_STUDENTS");
+        dtbm.addColumn("REGISTED");
+        dtbm.addColumn("TIME_ID");
+        try {
+            list = SelectallTimeTable.SelectallTimeTable();
+            for (TimeTable timeTable : list) {
+                Vector v = new Vector();
+                v.add(timeTable.getSUBJECT_ID());
+                v.add(timeTable.getSUBJECT_NAME());
+                v.add(timeTable.getMAX_STUDENTS());
+                v.add(timeTable.getREGISTED());
+                v.add(timeTable.getTIME_ID());
+                dtbm.addRow(v);
+            }
+            jTable1.setModel(dtbm);
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
