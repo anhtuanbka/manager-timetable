@@ -20,7 +20,7 @@ import ultility.ConnectionManager;
  */
 public class searchSubjectByName {
 
-    public List<Subject> searchSubjectByname(String stringInput) throws SQLException {
+    public static List<Subject> searchSubjectByname(String stringInput) throws SQLException {
         List<Subject> SubjectList = new ArrayList<>();
         String sql = "SELECT * FROM SUBJECTS WHERE SUBJECT_NAME LIKE ?";
         Connection cn = ConnectionManager.getConnection();

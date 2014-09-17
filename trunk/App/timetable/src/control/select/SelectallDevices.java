@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class SelectallDevices {
 
-    public List<Device> SelectallDevices() throws SQLException {
+    public static List<Device> SelectallDevices() throws SQLException {
         List<Device> DeviceList = new ArrayList<>();
         String sql = "SELECT * FROM DEVICES";
         try {

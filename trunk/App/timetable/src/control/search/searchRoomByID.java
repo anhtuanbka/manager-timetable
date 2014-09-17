@@ -20,7 +20,7 @@ import ultility.ConnectionManager;
  */
 public class searchRoomByID {
 
-    public List<Room> searchRoomByID(String stringInput) throws SQLException {
+    public static List<Room> searchRoomByID(String stringInput) throws SQLException {
         List<Room> RoomList = new ArrayList<>();
         String sql = "SELECT * FROM ROOMS WHERE ROOM_ID LIKE ?";
         Connection cn = ConnectionManager.getConnection();
