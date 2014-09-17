@@ -20,7 +20,7 @@ import ultility.ConnectionManager;
  */
 public class SelectallTimeTable {
 
-    public static List<TimeTable> SelectSubject() throws SQLException {
+    public static List<TimeTable> SelectallTimeTable() throws SQLException {
         List<TimeTable> TimeTablesList = new ArrayList<>();
         String sql = "SELECT * FROM TIMETABLE";
         try {
