@@ -22,7 +22,7 @@ public class SearchRoomByTypeName {
 
     public static List<Room> SearchRoomByTypeName(String stringInput) throws SQLException {
         List<Room> RoomList = new ArrayList<>();
-        String sql = "SELECT * FROM ROOMS,ROOMTYPES WHERE ROOMS.TYPE_ID LIKE ROOMTYPES.TYPE_ID AND ROOMTYPES.TYPE_NAME LIKE ?";
+        String sql = "SELECT ROOMS.ROOM_ID,ROOMS.STATUS,ROOMS.TYPE_ID FROM ROOMS,ROOMTYPES WHERE ROOMS.TYPE_ID LIKE ROOMTYPES.TYPE_ID AND ROOMTYPES.TYPE_NAME LIKE ?";
         Connection cn = ConnectionManager.getConnection();
         PreparedStatement ps = cn.prepareStatement(sql);
         ps.setString(1, "%" + stringInput + "%");
