@@ -6,15 +6,20 @@
 
 package view;
 
+import control.select.SelectallDevices;
 import control.select.SelectallRooms;
+import control.select.SelectallRoomsType;
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.Device;
 import model.Room;
+import model.RoomType;
 
 /**
  *
@@ -80,7 +85,7 @@ public class PanelRoom extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         jScrollPane2.getAccessibleContext().setAccessibleParent(jScrollPane2);
@@ -141,8 +146,8 @@ public class PanelRoom extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName(" Room List");
@@ -151,17 +156,49 @@ public class PanelRoom extends javax.swing.JPanel {
     public  void LoadTable()
     {
         List<Room> list = new ArrayList<>();
+        List<RoomType> listType = new ArrayList<>();
+        List<Device> listDevice = new ArrayList<>();
         
-        dtbm.addColumn("ROOM_ID");
-        dtbm.addColumn("TYPE_ID"); 
-        dtbm.addColumn("Status");
+        dtbm.addColumn("Phòng Học");
+        dtbm.addColumn("Kiểu Phòng"); 
+        dtbm.addColumn("Trạng Thái");
+        dtbm.addColumn("Máy Tính");
+        dtbm.addColumn("Đèn Chiếu Sáng");
+        dtbm.addColumn("Bàn");
+        dtbm.addColumn("Ghế");
+        dtbm.addColumn("Quạt");
+        dtbm.addColumn("Máy Chiếu");
         try {
             list = SelectallRooms.SelectallRooms();
+            listType = SelectallRoomsType.SelectallRoomsType();
+            listDevice = SelectallDevices.SelectallDevices();
             for (Room room : list) {
                 Vector v = new Vector();
-                v.add((room.getROOM_ID()));
-                v.add(room.getTYPE_ID());
-                v.add(room.isSTATUS());
+                v.add(room.getROOM_ID());
+                for(RoomType type : listType)
+                {
+                    if (room.getTYPE_ID().equals(type.getTYPE_ID())) {
+                        v.add(type.getTYPE_NAME());
+                    }
+                }
+                if (room.isSTATUS()) {
+                    v.add("Tốt"); 
+                }
+                else
+                {
+                    v.add("Đang Sửa Chữa");
+                }
+                 for(Device device : listDevice)
+                {
+                    if (device.getROOM_ID().equals(room.getROOM_ID())) {
+                        v.add(device.getCOMPUTERS());
+                        v.add(device.getLAMPS());
+                        v.add(device.getTABLES());
+                        v.add(device.getCHAIRS());
+                        v.add(device.getCELLING_FANS());
+                        v.add(device.getPROJECTORS());
+                    }
+                }
                 dtbm.addRow(v);
             }
            jTable1.setModel(dtbm);
