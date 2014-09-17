@@ -32,6 +32,9 @@ public class frmMain extends javax.swing.JFrame {
         
         PanelTimeTable pntt = new PanelTimeTable();
         tbnPanel.addTab("TIME TABLE", pntt);
+        
+        PanelUser pnu = new PanelUser();
+        tbnPanel.addTab("USERS", pnu);
     }
 
     /**
