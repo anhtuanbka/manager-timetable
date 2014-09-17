@@ -20,7 +20,7 @@ import ultility.ConnectionManager;
  */
 public class SelectallRoomsType {
 
-    public List<RoomType> SelectallRoomsType() throws SQLException {
+    public static List<RoomType> SelectallRoomsType() throws SQLException {
         List<RoomType> RoomsTypesList = new ArrayList<>();
         String sql = "SELECT * FROM ROOMTYPES";
         try {

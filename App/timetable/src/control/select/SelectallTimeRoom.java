@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class SelectallTimeRoom {
 
-    public List<TimeRoom> SelectallTimeRoom() throws SQLException {
+    public static List<TimeRoom> SelectallTimeRoom() throws SQLException {
         List<TimeRoom> TimeRoomList = new ArrayList<>();
         String sql = "SELECT * FROM TIME_ROOM";
         try {
