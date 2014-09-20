@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
-import control.select.CheckLogin;
+import control.CheckLogin;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -23,16 +22,15 @@ public class frmLogin extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     //frmConfigConnection frmCfConn = new frmConfigConnection();
-    
     frmConfigConnection frmCfConn;
-    
+
     public frmLogin() {
         initComponents();
         frmCfConn = new frmConfigConnection();
         Dimension loginDMS = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(loginDMS.width/2-this.getSize().width/2, loginDMS.height/2-this.getSize().height/2);
+        this.setLocation(loginDMS.width / 2 - this.getSize().width / 2, loginDMS.height / 2 - this.getSize().height / 2);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +150,7 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       frmCfConn.setVisible(true);
+        frmCfConn.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
@@ -161,17 +159,17 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(CheckLogin.check(txtUserName.getText(), new String(txtPassword.getPassword()))){
+        if (CheckLogin.check(txtUserName.getText(), new String(txtPassword.getPassword()))) {
             frmMain frmMainForm = new frmMain();
             frmMainForm.setVisible(true);
             this.setVisible(false);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Login failed!");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnLoginActionPerformed(null);
         }
     }//GEN-LAST:event_txtPasswordKeyPressed

@@ -6,11 +6,9 @@
 
 package view;
 
-import control.select.SelectallDevices;
-import control.select.SelectallRooms;
-import control.select.SelectallRoomsType;
+import control.DevicesManager;
+import control.RoomManager;
 import java.sql.SQLException;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -25,7 +23,7 @@ import model.RoomType;
  *
  * @author VuDucCanh
  */
-public class PanelRoom extends javax.swing.JPanel {
+public final class PanelRoom extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelRoom
@@ -169,9 +167,9 @@ public class PanelRoom extends javax.swing.JPanel {
         dtbm.addColumn("Quạt");
         dtbm.addColumn("Máy Chiếu");
         try {
-            list = SelectallRooms.SelectallRooms();
-            listType = SelectallRoomsType.SelectallRoomsType();
-            listDevice = SelectallDevices.SelectallDevices();
+            list = RoomManager.SelectallRooms();
+            listType = RoomManager.SelectallRoomsType();
+            listDevice = DevicesManager.SelectallDevices();
             for (Room room : list) {
                 Vector v = new Vector();
                 v.add(room.getROOM_ID());

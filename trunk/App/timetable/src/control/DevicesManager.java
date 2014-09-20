@@ -3,22 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package control.select;
+package control;
 
-import model.Device;
-import ultility.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Device;
+import ultility.ConnectionManager;
 
 /**
  *
- * @author Dr.Cuong
+ * @author VuDucCanh
  */
-public class SelectallDevices {
+public class DevicesManager {
+
+    private static int result;
 
     public static List<Device> SelectallDevices() throws SQLException {
         List<Device> DeviceList = new ArrayList<>();
@@ -44,4 +48,20 @@ public class SelectallDevices {
         return DeviceList;
     }
 
+    public static boolean DeleteDevice(String ID) {
+
+        String sql = "DELETE FROM DEVIDES WHERE ROOM_ID =?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ID);
+            result = ps.executeUpdate();
+            if (result > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+
+        return false;
+    }
 }

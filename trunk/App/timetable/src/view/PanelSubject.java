@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
-import control.select.SelectallSubject;
+import control.SubjectManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,8 @@ public class PanelSubject extends javax.swing.JPanel {
     /**
      * Creates new form PanelSubject
      */
-    
     DefaultTableModel dtbm = new DefaultTableModel();
+
     public PanelSubject() {
         initComponents();
         LoadTable();
@@ -45,6 +44,7 @@ public class PanelSubject extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Search"));
 
@@ -74,17 +74,30 @@ public class PanelSubject extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setText("EDIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 214, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addComponent(jButton1)
+                .addGap(0, 129, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -107,15 +120,27 @@ public class PanelSubject extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public  void LoadTable()
-    {
-        List<Subject> list = new ArrayList<>();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       int index = jTable1.getSelectedRow();
         
+        Vector Row = (Vector) dtbm.getDataVector().get(index);
+       
+        for (int i = 0; i < Row.size(); i++) {
+             System.out.println(Row.get(i));
+        }
+        //int CurrentID = Integer.parseInt(Row.get(0).toString());
+        System.out.println(index);
+        System.out.println(Row.size());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void LoadTable() {
+        List<Subject> list = new ArrayList<>();
+
         dtbm.addColumn("SUBJECT_Name");
-        dtbm.addColumn("SUBJECT_ID"); 
+        dtbm.addColumn("SUBJECT_ID");
         dtbm.addColumn("MAster");
         try {
-            list = SelectallSubject.SelectSubject();
+            list = SubjectManager.SelectSubject();
             for (Subject subject : list) {
                 Vector v = new Vector();
                 v.add(subject.getSUBJECT_NAME());
@@ -123,13 +148,14 @@ public class PanelSubject extends javax.swing.JPanel {
                 v.add(subject.getMASTER_SUBJECT());
                 dtbm.addRow(v);
             }
-           jTable1.setModel(dtbm);
+            jTable1.setModel(dtbm);
         } catch (SQLException ex) {
             Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
