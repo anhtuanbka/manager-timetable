@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
-import control.select.SelectallTimeTable;
+
+import control.TimeTableManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.TimeTable;
+
 /**
  *
  * @author VuDucCanh
@@ -25,6 +26,7 @@ public class PanelTimeTable extends javax.swing.JPanel {
      * Creates new form PanelTimeTable
      */
     DefaultTableModel dtbm = new DefaultTableModel();
+
     public PanelTimeTable() {
         initComponents();
         LoadTable();
@@ -90,17 +92,16 @@ public class PanelTimeTable extends javax.swing.JPanel {
                 .addGap(348, 348, 348))
         );
     }// </editor-fold>//GEN-END:initComponents
-    public  void LoadTable()
-    {
+    public void LoadTable() {
         List<TimeTable> list = new ArrayList<>();
-        
+
         dtbm.addColumn("SUBJECT_ID");
-        dtbm.addColumn("SUBJECT_NAME"); 
+        dtbm.addColumn("SUBJECT_NAME");
         dtbm.addColumn("MAX_STUDENTS");
         dtbm.addColumn("REGISTED");
         dtbm.addColumn("TIME_ID");
         try {
-            list = SelectallTimeTable.SelectallTimeTable();
+            list = TimeTableManager.SelectallTimeTable();
             for (TimeTable timeTable : list) {
                 Vector v = new Vector();
                 v.add(timeTable.getSUBJECT_ID());

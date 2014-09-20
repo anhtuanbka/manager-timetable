@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
+
+import control.UserManager;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+import model.User;
 
 /**
  *
@@ -15,8 +20,11 @@ public class PanelUser extends javax.swing.JPanel {
     /**
      * Creates new form PanelUser
      */
+    DefaultTableModel dtbm = new DefaultTableModel();
+
     public PanelUser() {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -31,6 +39,7 @@ public class PanelUser extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,6 +67,13 @@ public class PanelUser extends javax.swing.JPanel {
             .addGap(0, 131, Short.MAX_VALUE)
         );
 
+        jButton1.setText("EDIT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,24 +82,64 @@ public class PanelUser extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(46, 46, 46)
+                .addComponent(jButton1)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int index = jTable1.getSelectedRow();
+        
+        Vector Row = (Vector) dtbm.getDataVector().get(index);
+       
+        for (Object Row1 : Row) {
+            System.out.println(Row1.toString());
+        }
+        //int CurrentID = Integer.parseInt(Row.get(0).toString());
+        System.out.println(index);
+        System.out.println(Row.size());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void loadTable() {
+        List<User> list = UserManager.SelectAllUsers();
+        dtbm.addColumn("Tài Khoản");
+        dtbm.addColumn("Họ Tên");
+        dtbm.addColumn("Điện Thoại");
+        dtbm.addColumn("Địa Chỉ");
+        dtbm.addColumn("Admin");
+
+        for (User item : list) {
+            Vector v = new Vector();
+            v.add(item.getUSERNAME());
+            v.add(item.getENAME());
+            v.add(item.getPHONE());
+            v.add(item.getADDRESS());
+            v.add(item.isADMIN());
+            dtbm.addRow(v);
+        }
+        jTable1.setModel(dtbm);
+    }
 }
