@@ -62,6 +62,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        txtPassword.setToolTipText("");
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyPressed(evt);
@@ -145,6 +146,8 @@ public class frmLogin extends javax.swing.JFrame {
                     .addComponent(btnLogin)
                     .addComponent(btnReset)))
         );
+
+        txtPassword.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
