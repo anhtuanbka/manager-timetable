@@ -48,12 +48,16 @@ public class PanelUser extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jtxtPhone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtxtAdd = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jPass = new javax.swing.JPasswordField();
         jadmin = new javax.swing.JRadioButton();
         juser = new javax.swing.JRadioButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,27 +81,31 @@ public class PanelUser extends javax.swing.JPanel {
 
         jLabel1.setText("UserName");
 
-        jtxtUser.setEditable(false);
+        jtxtUser.setEnabled(false);
 
         jLabel2.setText("Password");
 
         jLabel4.setText("Full Name");
 
+        jtxtName.setEnabled(false);
+
         jLabel3.setText("Phone");
+
+        jtxtPhone.setEnabled(false);
 
         jLabel5.setText("Address");
 
-        jtxtAdd.setColumns(20);
-        jtxtAdd.setRows(5);
-        jScrollPane2.setViewportView(jtxtAdd);
-
         jLabel6.setText("Admin");
 
-        jPass.setText("jPasswordField1");
+        jPass.setEnabled(false);
 
         jadmin.setText("TRUE");
+        jadmin.setEnabled(false);
 
         juser.setText("FLASE");
+        juser.setEnabled(false);
+
+        jTextField1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,7 +123,7 @@ public class PanelUser extends javax.swing.JPanel {
                     .addComponent(jtxtName)
                     .addComponent(jPass, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                 .addGap(74, 74, 74)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
@@ -129,8 +137,8 @@ public class PanelUser extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextField1)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,17 +149,15 @@ public class PanelUser extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jtxtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
+                    .addComponent(jPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -161,6 +167,18 @@ public class PanelUser extends javax.swing.JPanel {
                 .addGap(21, 21, 21))
         );
 
+        jButton1.setText("SAVE");
+        jButton1.setEnabled(false);
+
+        jButton2.setText("EDIT");
+
+        jButton3.setText("INSERT");
+
+        jButton4.setText("CANCEL");
+        jButton4.setEnabled(false);
+
+        jButton5.setText("DELETE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,8 +187,23 @@ public class PanelUser extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE))
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jButton3)
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton2)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(jButton1)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +212,16 @@ public class PanelUser extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton1))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 //Sử lý sự kiện click chuột vào Table
@@ -197,6 +239,11 @@ public class PanelUser extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -206,10 +253,9 @@ public class PanelUser extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPass;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton jadmin;
-    private javax.swing.JTextArea jtxtAdd;
     private javax.swing.JTextField jtxtName;
     private javax.swing.JTextField jtxtPhone;
     private javax.swing.JTextField jtxtUser;
@@ -240,7 +286,7 @@ public class PanelUser extends javax.swing.JPanel {
         jtxtUser.setText(user.getUSERNAME());
         jPass.setText(user.getPASSWORD());
         jtxtPhone.setText(Integer.toString(user.getPHONE()));
-        jtxtAdd.setText(user.getADDRESS());
+        jTextField1.setText(user.getADDRESS());
         jtxtName.setText(user.getENAME());
         if (user.isADMIN()) {
             jadmin.setSelected(true);
@@ -251,5 +297,15 @@ public class PanelUser extends javax.swing.JPanel {
             juser.setSelected(true);
             jadmin.setSelected(false);
         }
+    }
+    private void SetTextFeild()
+    {
+        jtxtName.setEnabled(true);
+        jPass.setEnabled(true);
+        jtxtPhone.setEnabled(true);
+        jtxtUser.setEnabled(true);
+        jTable1.setEnabled(true);
+        jadmin.setEnabled(true);
+        juser.setEnabled(true);
     }
 }
