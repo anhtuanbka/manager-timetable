@@ -69,4 +69,28 @@ public class UserManager {
 
         return false;
     }
+
+    public static User GetUserByUsername(String user) {
+        User item = new User();
+        String sql = "Select * FROM USERS where USERNAME=?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                item.setENAME(rs.getString("ENAME"));
+                item.setADDRESS(rs.getString("ADDRESS"));
+                item.setADMIN(rs.getBoolean("ADMIN"));
+                item.setID(rs.getString("ID"));
+                item.setPASSWORD(rs.getString("PASSWORD"));
+                item.setPHONE(rs.getInt("PHONE"));
+                item.setUSERNAME(rs.getString("USERNAME"));
+            }
+        } catch (Exception e) {
+        }
+        return item;
+
+    }
 }
