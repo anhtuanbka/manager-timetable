@@ -6,8 +6,10 @@
 package view;
 
 import control.UserManager;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.User;
 
@@ -21,6 +23,8 @@ public class PanelUser extends javax.swing.JPanel {
      * Creates new form PanelUser
      */
     DefaultTableModel dtbm = new DefaultTableModel();
+    boolean Insert;
+    boolean Edit;
 
     public PanelUser() {
         initComponents();
@@ -53,11 +57,11 @@ public class PanelUser extends javax.swing.JPanel {
         jadmin = new javax.swing.JRadioButton();
         juser = new javax.swing.JRadioButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbSave = new javax.swing.JButton();
+        jbEdit = new javax.swing.JButton();
+        jbInsert = new javax.swing.JButton();
+        jbCancel = new javax.swing.JButton();
+        jbDelete = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,17 +171,37 @@ public class PanelUser extends javax.swing.JPanel {
                 .addGap(21, 21, 21))
         );
 
-        jButton1.setText("SAVE");
-        jButton1.setEnabled(false);
+        jbSave.setText("SAVE");
+        jbSave.setEnabled(false);
+        jbSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSaveActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("EDIT");
+        jbEdit.setText("EDIT");
+        jbEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEditActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("INSERT");
+        jbInsert.setText("ADD_NEW");
+        jbInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInsertActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("CANCEL");
-        jButton4.setEnabled(false);
+        jbCancel.setText("CANCEL");
+        jbCancel.setEnabled(false);
+        jbCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("DELETE");
+        jbDelete.setText("DELETE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -193,16 +217,16 @@ public class PanelUser extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(139, 139, 139)
-                        .addComponent(jButton3)
+                        .addComponent(jbInsert)
                         .addGap(69, 69, 69)
-                        .addComponent(jButton2)
+                        .addComponent(jbEdit)
                         .addGap(47, 47, 47)
-                        .addComponent(jButton5))
+                        .addComponent(jbDelete))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(214, 214, 214)
-                        .addComponent(jButton1)
+                        .addComponent(jbSave)
                         .addGap(47, 47, 47)
-                        .addComponent(jButton4)))
+                        .addComponent(jbCancel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -214,13 +238,13 @@ public class PanelUser extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
+                    .addComponent(jbEdit)
+                    .addComponent(jbInsert)
+                    .addComponent(jbDelete))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
+                    .addComponent(jbCancel)
+                    .addComponent(jbSave))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -237,13 +261,48 @@ public class PanelUser extends javax.swing.JPanel {
         LoadDetailUser(item);
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jbInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInsertActionPerformed
+        jbEdit.setEnabled(false);
+        jbDelete.setEnabled(false);
+        SetSaveCancelButton();
+        SetTextFeild(true);
+        SetTextFeildNull();
+        Insert = true;
+
+    }//GEN-LAST:event_jbInsertActionPerformed
+
+    private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelActionPerformed
+        jbEdit.setEnabled(true);
+        jbDelete.setEnabled(true);
+        jbInsert.setEnabled(true);
+        SetTextFeildNull();
+        SetTextFeild(false);
+        jbSave.setEnabled(false);
+        jbCancel.setEnabled(false);
+    }//GEN-LAST:event_jbCancelActionPerformed
+
+    private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
+        if (Insert) {
+            InsertButton();
+        }
+        if (Edit) {
+            EditButton();
+        }
+
+    }//GEN-LAST:event_jbSaveActionPerformed
+
+    private void jbEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditActionPerformed
+        // TODO add your handling code here:
+        jbInsert.setEnabled(false);
+        jbDelete.setEnabled(false);
+        SetSaveCancelButton();
+        SetTextFeild(true);
+        jtxtUser.setEnabled(false);
+
+    }//GEN-LAST:event_jbEditActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -256,6 +315,11 @@ public class PanelUser extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton jadmin;
+    private javax.swing.JButton jbCancel;
+    private javax.swing.JButton jbDelete;
+    private javax.swing.JButton jbEdit;
+    private javax.swing.JButton jbInsert;
+    private javax.swing.JButton jbSave;
     private javax.swing.JTextField jtxtName;
     private javax.swing.JTextField jtxtPhone;
     private javax.swing.JTextField jtxtUser;
@@ -291,21 +355,125 @@ public class PanelUser extends javax.swing.JPanel {
         if (user.isADMIN()) {
             jadmin.setSelected(true);
             juser.setSelected(false);
-        }
-        else
-        {
+        } else {
             juser.setSelected(true);
             jadmin.setSelected(false);
         }
     }
-    private void SetTextFeild()
-    {
-        jtxtName.setEnabled(true);
-        jPass.setEnabled(true);
-        jtxtPhone.setEnabled(true);
-        jtxtUser.setEnabled(true);
-        jTable1.setEnabled(true);
-        jadmin.setEnabled(true);
-        juser.setEnabled(true);
+
+    private void SetTextFeild(boolean temp) {
+        if (temp == true) {
+            jtxtName.setEnabled(true);
+            jPass.setEnabled(true);
+            jtxtPhone.setEnabled(true);
+            jtxtUser.setEnabled(true);
+            jTextField1.setEnabled(true);
+            jadmin.setEnabled(true);
+            juser.setEnabled(true);
+        } else {
+            jtxtName.setEnabled(false);
+            jPass.setEnabled(false);
+            jtxtPhone.setEnabled(false);
+            jtxtUser.setEnabled(false);
+            jTextField1.setEnabled(false);
+            jadmin.setEnabled(false);
+            juser.setEnabled(false);
+        }
+
+    }
+
+    private void SetTextFeildNull() {
+        jtxtName.setText("");
+        jPass.setText("");
+        jtxtPhone.setText("");
+        jtxtUser.setText("");
+        jTextField1.setText("");
+        juser.setSelected(true);
+    }
+
+    private void SetSaveCancelButton() {
+        jbSave.setEnabled(true);
+        jbCancel.setEnabled(true);
+    }
+
+    private String CheckTextFeild() {
+        String Error = "";
+        boolean kt = true;
+        if (jtxtUser.getText().equals("")) {
+            Error += "UserName không được để trống\n";
+        }
+        if (jPass.getPassword() == null || jPass.getPassword().toString().length() < 8) {
+            Error = Error + "Password không được để trống và Sử dụng ít nhất 8 ký tự. \n";
+        }
+        if (jtxtName.getText().equals("")) {
+            Error = Error + "FullNam không được để trống \n";
+        }
+        String phone = jtxtPhone.getText().toString();
+        try {
+            int a = Integer.parseInt(phone);
+        } catch (Exception e) {
+            kt = false;
+        }
+
+        if (jtxtPhone.getText().equals("") || (kt == false)) {
+            Error = Error + "Phone không được để trông và phải nhập số\n ";
+        }
+        if (jTextField1.getText().equals("")) {
+            Error = Error + "Address không được để trống\n";
+        }
+        return Error;
+    }
+
+    private void InsertButton() {
+        String Error = CheckTextFeild();
+        if (Error.equals("")) {
+            if (UserManager.CheckUser(jtxtUser.getText()) == false) {
+                User user = new User();
+                user.setUSERNAME(jtxtUser.getText());
+                user.setPASSWORD(new String(jPass.getPassword()));
+                user.setENAME(jtxtName.getText());
+                user.setPHONE(Integer.parseInt(jtxtPhone.getText()));
+                user.setADDRESS(jTextField1.getText());
+                if (jadmin.isSelected()) {
+                    user.setADMIN(true);
+                } else {
+                    user.setADMIN(false);
+                }
+                boolean temp = UserManager.InsertUser(user);
+                if (temp) {
+                    JOptionPane.showMessageDialog(this, "Thành Công");
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "User đã tồn tại\n");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, Error);
+        }
+    }
+
+    private void EditButton() {
+        String Error = CheckTextFeild();
+        if (Error.equals("")) {
+            if (UserManager.CheckUser(jtxtUser.getText()) == true) {
+                User user = new User();
+                user.setUSERNAME(jtxtUser.getText());
+                user.setPASSWORD(new String(jPass.getPassword()));
+                user.setENAME(jtxtName.getText());
+                user.setPHONE(Integer.parseInt(jtxtPhone.getText()));
+                user.setADDRESS(jTextField1.getText());
+                if (jadmin.isSelected()) {
+                    user.setADMIN(true);
+                } else {
+                    user.setADMIN(false);
+                }
+                boolean temp = UserManager.InsertUser(user);
+                if (temp) {
+                    JOptionPane.showMessageDialog(this, "Thành Công");
+
+                }
+            }
+        }
     }
 }
