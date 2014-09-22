@@ -29,6 +29,7 @@ public class PanelUser extends javax.swing.JPanel {
     public PanelUser() {
         initComponents();
 // hiển thị dữ liệu ra bảng
+        reset();
         loadTable();
     }
 
@@ -282,11 +283,15 @@ public class PanelUser extends javax.swing.JPanel {
     }//GEN-LAST:event_jbCancelActionPerformed
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
-        if (Insert) {
+        if (Insert==true) {
             InsertButton();
+            reset();
+            loadTable();
         }
-        if (Edit) {
+        if (Edit==true) {
             EditButton();
+            reset();
+            loadTable();
         }
 
     }//GEN-LAST:event_jbSaveActionPerformed
@@ -298,6 +303,7 @@ public class PanelUser extends javax.swing.JPanel {
         SetSaveCancelButton();
         SetTextFeild(true);
         jtxtUser.setEnabled(false);
+        Edit=true;
 
     }//GEN-LAST:event_jbEditActionPerformed
 
@@ -408,10 +414,10 @@ public class PanelUser extends javax.swing.JPanel {
         if (jtxtName.getText().equals("")) {
             Error = Error + "FullNam không được để trống \n";
         }
-        String phone = jtxtPhone.getText().toString();
+        String phone = jtxtPhone.getText();
         try {
             int a = Integer.parseInt(phone);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             kt = false;
         }
 
@@ -468,12 +474,18 @@ public class PanelUser extends javax.swing.JPanel {
                 } else {
                     user.setADMIN(false);
                 }
-                boolean temp = UserManager.InsertUser(user);
+                boolean temp = UserManager.UpdateUser(user);
                 if (temp) {
                     JOptionPane.showMessageDialog(this, "Thành Công");
-
                 }
             }
         }
+        else {
+            JOptionPane.showMessageDialog(this, Error);
+        }
+    }
+
+    private void reset() {
+        dtbm.setRowCount(0);
     }
 }
