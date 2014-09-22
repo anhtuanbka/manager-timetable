@@ -203,6 +203,11 @@ public class PanelUser extends javax.swing.JPanel {
         });
 
         jbDelete.setText("DELETE");
+        jbDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -283,12 +288,12 @@ public class PanelUser extends javax.swing.JPanel {
     }//GEN-LAST:event_jbCancelActionPerformed
 
     private void jbSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSaveActionPerformed
-        if (Insert==true) {
+        if (Insert == true) {
             InsertButton();
             reset();
             loadTable();
         }
-        if (Edit==true) {
+        if (Edit == true) {
             EditButton();
             reset();
             loadTable();
@@ -303,9 +308,20 @@ public class PanelUser extends javax.swing.JPanel {
         SetSaveCancelButton();
         SetTextFeild(true);
         jtxtUser.setEnabled(false);
-        Edit=true;
+        Edit = true;
 
     }//GEN-LAST:event_jbEditActionPerformed
+
+    private void jbDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDeleteActionPerformed
+       
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Would you like to Delete USER " +jtxtUser.getText()+ "?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+                UserManager.DeleteUser(jtxtUser.getText());
+                reset();
+                loadTable();
+            } 
+    }//GEN-LAST:event_jbDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -479,8 +495,7 @@ public class PanelUser extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Thành Công");
                 }
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(this, Error);
         }
     }
