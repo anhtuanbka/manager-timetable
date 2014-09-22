@@ -55,7 +55,7 @@ public class UserManager {
 
     public static boolean DeleteUser(String ID) {
 
-        String sql = "DELETE FROM USERS WHERE ID =?";
+        String sql = "DELETE FROM USERS WHERE USERNAME =?";
         Connection conn = ConnectionManager.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
