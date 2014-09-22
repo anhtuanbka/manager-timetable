@@ -116,6 +116,27 @@ public class UserManager {
         
         return false;
     }
+    public static boolean UpdateUser(User user)
+    {
+        String sql = "UPDATE USERS SET PASSWORD=?,ENAME=?,PHONE=?,ADDRESS=?,ADMIN=? WHERE USERNAME=?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,user.getPASSWORD());
+            ps.setString(2,user.getENAME());
+            ps.setInt(3, user.getPHONE());
+            ps.setString(4,user.getADDRESS());
+            ps.setBoolean(5,user.isADMIN());
+            ps.setString(6,user.getUSERNAME());
+            int i = ps.executeUpdate();
+            if (i!=0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     public static boolean CheckUser(String user)
     {
         String sql = "Select * FROM USERS where USERNAME=?";
