@@ -239,12 +239,18 @@
             <Property name="text" type="java.lang.String" value="TRUE"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jadminMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="juser">
           <Properties>
             <Property name="text" type="java.lang.String" value="FLASE"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="juserMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>

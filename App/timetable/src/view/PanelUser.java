@@ -111,9 +111,19 @@ public class PanelUser extends javax.swing.JPanel {
 
         jadmin.setText("TRUE");
         jadmin.setEnabled(false);
+        jadmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jadminMouseClicked(evt);
+            }
+        });
 
         juser.setText("FLASE");
         juser.setEnabled(false);
+        juser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                juserMouseClicked(evt);
+            }
+        });
 
         jTextField1.setEnabled(false);
 
@@ -327,6 +337,16 @@ public class PanelUser extends javax.swing.JPanel {
                 loadTable();
             } 
     }//GEN-LAST:event_jbDeleteActionPerformed
+
+    private void jadminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jadminMouseClicked
+        jadmin.setSelected(true);
+        juser.setSelected(false);
+    }//GEN-LAST:event_jadminMouseClicked
+
+    private void juserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_juserMouseClicked
+         jadmin.setSelected(false);
+        juser.setSelected(true);
+    }//GEN-LAST:event_juserMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
