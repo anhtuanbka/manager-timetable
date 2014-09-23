@@ -29,6 +29,11 @@ public class PanelUser extends javax.swing.JPanel {
     public PanelUser() {
         initComponents();
 // hiển thị dữ liệu ra bảng
+        dtbm.addColumn("Tài Khoản");
+        dtbm.addColumn("Họ Tên");
+        dtbm.addColumn("Điện Thoại");
+        dtbm.addColumn("Địa Chỉ");
+        dtbm.addColumn("Admin");
         reset();
         loadTable();
     }
@@ -350,11 +355,7 @@ public class PanelUser extends javax.swing.JPanel {
 
     private void loadTable() {
         List<User> list = UserManager.SelectAllUsers();
-        dtbm.addColumn("Tài Khoản");
-        dtbm.addColumn("Họ Tên");
-        dtbm.addColumn("Điện Thoại");
-        dtbm.addColumn("Địa Chỉ");
-        dtbm.addColumn("Admin");
+       
 
         for (User item : list) {
             Vector v = new Vector();
@@ -371,7 +372,7 @@ public class PanelUser extends javax.swing.JPanel {
     private void LoadDetailUser(User user) {
         jtxtUser.setText(user.getUSERNAME());
         jPass.setText(user.getPASSWORD());
-        jtxtPhone.setText(Integer.toString(user.getPHONE()));
+        jtxtPhone.setText(user.getPHONE());
         jTextField1.setText(user.getADDRESS());
         jtxtName.setText(user.getENAME());
         if (user.isADMIN()) {
@@ -454,7 +455,7 @@ public class PanelUser extends javax.swing.JPanel {
                 user.setUSERNAME(jtxtUser.getText());
                 user.setPASSWORD(new String(jPass.getPassword()));
                 user.setENAME(jtxtName.getText());
-                user.setPHONE(Integer.parseInt(jtxtPhone.getText()));
+                user.setPHONE((jtxtPhone.getText()));
                 user.setADDRESS(jTextField1.getText());
                 if (jadmin.isSelected()) {
                     user.setADMIN(true);
@@ -483,7 +484,7 @@ public class PanelUser extends javax.swing.JPanel {
                 user.setUSERNAME(jtxtUser.getText());
                 user.setPASSWORD(new String(jPass.getPassword()));
                 user.setENAME(jtxtName.getText());
-                user.setPHONE(Integer.parseInt(jtxtPhone.getText()));
+                user.setPHONE((jtxtPhone.getText()));
                 user.setADDRESS(jTextField1.getText());
                 if (jadmin.isSelected()) {
                     user.setADMIN(true);

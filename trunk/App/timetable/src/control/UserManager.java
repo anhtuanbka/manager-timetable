@@ -42,7 +42,7 @@ public class UserManager {
                 item.setADMIN(rs.getBoolean("ADMIN"));
                 item.setID(rs.getString("ID"));
                 item.setPASSWORD(rs.getString("PASSWORD"));
-                item.setPHONE(rs.getInt("PHONE"));
+                item.setPHONE(rs.getString("PHONE"));
                 item.setUSERNAME(rs.getString("USERNAME"));
                 list.add(item);
             }
@@ -85,7 +85,7 @@ public class UserManager {
                 item.setADMIN(rs.getBoolean("ADMIN"));
                 item.setID(rs.getString("ID"));
                 item.setPASSWORD(rs.getString("PASSWORD"));
-                item.setPHONE(rs.getInt("PHONE"));
+                item.setPHONE(rs.getString("PHONE"));
                 item.setUSERNAME(rs.getString("USERNAME"));
             }
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class UserManager {
             ps.setString(1,user.getUSERNAME());
             ps.setString(2,user.getPASSWORD());
             ps.setString(3,user.getENAME());
-            ps.setInt(4, user.getPHONE());
+            ps.setString(4, user.getPHONE());
             ps.setString(5,user.getADDRESS());
             ps.setBoolean(6,user.isADMIN());
             
@@ -124,7 +124,7 @@ public class UserManager {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,user.getPASSWORD());
             ps.setString(2,user.getENAME());
-            ps.setInt(3, user.getPHONE());
+            ps.setString(3, user.getPHONE());
             ps.setString(4,user.getADDRESS());
             ps.setBoolean(5,user.isADMIN());
             ps.setString(6,user.getUSERNAME());
