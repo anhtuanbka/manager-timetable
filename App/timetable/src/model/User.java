@@ -15,11 +15,11 @@ public class User {
     private String USERNAME;
     private String PASSWORD;
     private String ENAME;
-    private int PHONE;
+    private String PHONE;
     private String ADDRESS;
     private boolean ADMIN;
 
-    public User(String ID, String USERNAME, String PASSWORD, String ENAME, int PHONE, String ADDRESS, boolean ADMIN) {
+    public User(String ID, String USERNAME, String PASSWORD, String ENAME, String PHONE, String ADDRESS, boolean ADMIN) {
         this.ID = ID;
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
@@ -48,7 +48,7 @@ public class User {
         this.ENAME = ENAME;
     }
 
-    public void setPHONE(int PHONE) {
+    public void setPHONE(String PHONE) {
         this.PHONE = PHONE;
     }
 
@@ -76,7 +76,7 @@ public class User {
         return ENAME;
     }
 
-    public int getPHONE() {
+    public String getPHONE() {
         return PHONE;
     }
 
