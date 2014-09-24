@@ -5,15 +5,16 @@
  */
 package control;
 
-import static control.RoomManager.DeleteRoom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Room;
 import model.RoomType;
 import ultility.ConnectionManager;
@@ -26,117 +27,86 @@ public class RoomManager {
 
     private static int result;
 
-    //GET DATA
-    public static List<Room> SelectallRooms() throws SQLException {
-        List<Room> RoomsList = new ArrayList<>();
-        String sql = "SELECT * FROM ROOMS";
+    public static List<Room> getAllRooms() {
+        List<Room> listRooms = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
         try {
-            Connection cn = ConnectionManager.getConnection();
-            PreparedStatement ps = cn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            conn = ConnectionManager.getConnection();
+            pstm = conn.prepareStatement("select * from ROOMS,ROOMTYPES where ROOMS.TYPE_ID=ROOMTYPES.TYPE_ID");
+            rs = pstm.executeQuery();
             while (rs.next()) {
-                Room room = new Room();
-                room.setROOM_ID(rs.getString("ROOM_ID"));
-                room.setSTATUS(rs.getBoolean("STATUS"));
-                room.setTYPE_ID(rs.getString("TYPE_ID"));
-                RoomsList.add(room);
+                listRooms.add(new Room(rs.getString("ROOM_ID"), rs.getString("TYPE_NAME"), rs.getBoolean("STATUS")));
             }
-        } catch (Exception e) {
-
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Load rooms failed!");
+            //Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionManager.closeAll(conn, pstm, rs);
         }
-        return RoomsList;
+
+        return listRooms;
     }
 
-    public static List<RoomType> SelectallRoomsType() throws SQLException {
-        List<RoomType> RoomsTypesList = new ArrayList<>();
-        String sql = "SELECT * FROM ROOMTYPES";
+    public static List<RoomType> getAllRoomTypes() {
+        List<RoomType> listRoomType = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
         try {
-            Connection cn = ConnectionManager.getConnection();
-            PreparedStatement ps = cn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            conn = ConnectionManager.getConnection();
+            pstm = conn.prepareStatement("select * from ROOMTYPES");
+            rs = pstm.executeQuery();
             while (rs.next()) {
-                RoomType roomType = new RoomType();
-                roomType.setTYPE_ID(rs.getString("TYPE_ID"));
-                roomType.setTYPE_NAME(rs.getString("TYPE_NAME"));
-                RoomsTypesList.add(roomType);
+                listRoomType.add(new RoomType(rs.getString("TYPE_ID"), rs.getString("TYPE_NAME")));
             }
-        } catch (Exception e) {
-
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Load room type failed!");
+            //Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionManager.closeAll(conn, pstm, rs);
         }
-        return RoomsTypesList;
-    }
-//SEARCH ...
 
-    public static List<Room> SearchRoomByTypeName(String stringInput) throws SQLException {
-        List<Room> RoomList = new ArrayList<>();
-        String sql = "SELECT ROOMS.ROOM_ID,ROOMS.STATUS,ROOMS.TYPE_ID FROM ROOMS,ROOMTYPES WHERE ROOMS.TYPE_ID LIKE ROOMTYPES.TYPE_ID AND ROOMTYPES.TYPE_NAME LIKE ?";
-        Connection cn = ConnectionManager.getConnection();
-        PreparedStatement ps = cn.prepareStatement(sql);
-        ps.setString(1, "%" + stringInput + "%");
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Room room = new Room();
-            room.setROOM_ID(rs.getString("ROOM_ID"));
-            room.setSTATUS(rs.getBoolean("STATUS"));
-            room.setTYPE_ID(rs.getString("TYPE_ID"));
-            RoomList.add(room);
-        }
-        return RoomList;
-
+        return listRoomType;
     }
 
-    public static List<Room> searchRoomByID(String stringInput) throws SQLException {
-        List<Room> RoomList = new ArrayList<>();
-        String sql = "SELECT * FROM ROOMS WHERE ROOM_ID LIKE ?";
-        Connection cn = ConnectionManager.getConnection();
-        PreparedStatement ps = cn.prepareStatement(sql);
-        ps.setString(1, "%" + stringInput + "%");
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Room room = new Room();
-            room.setROOM_ID(rs.getString("ROOM_ID"));
-            room.setSTATUS(rs.getBoolean("STATUS"));
-            room.setTYPE_ID(rs.getString("TYPE_ID"));
-            RoomList.add(room);
-
-        }
-        return RoomList;
-    }
-
-//DELETE
-    public static boolean DeleteRoom(String ID) {
-
-        String sql = "DELETE FROM ROOMS WHERE ROOM_ID =?";
-        Connection conn = ConnectionManager.getConnection();
+    public static List<Room> searchRooms(String roomid, String roomtype, String status) {
+        List<Room> listRoom = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, ID);
-            result = ps.executeUpdate();
-            if (result > 0) {
-                return true;
+            conn = ConnectionManager.getConnection();
+            pstm = conn.prepareStatement("select * from ROOMS,ROOMTYPES where STATUS like '%"+status +"%' and ROOMTYPES.TYPE_NAME like N'%"+roomtype +"%' and ROOM_ID like '%"+roomid +"%' and ROOMS.TYPE_ID=ROOMTYPES.TYPE_ID");
+            //pstm.setString(1, status);
+            //pstm.setString(2, roomtype);
+            //pstm.setString(3, roomid);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                listRoom.add(new Room(rs.getString("ROOM_ID"), rs.getString("TYPE_NAME"), rs.getBoolean("STATUS")));
             }
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            ConnectionManager.closeAll(conn, pstm, rs);
         }
 
-        return false;
+        return listRoom;
     }
 
-    public static boolean DeleteRoomType(String ID) {
-
-        String sql = "DELETE FROM ROOMTYPES WHERE TYPE_ID =?";
-        Connection conn = ConnectionManager.getConnection();
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, ID);
-            result = ps.executeUpdate();
-            if (result > 0) {
-                return true;
-            }
-        } catch (Exception e) {
+    public static Vector convertRoomToVector(Room r) {
+        Vector v = new Vector();
+        v.add(r.getROOM_ID());
+        v.add(r.getTYPE_ID());
+        if (r.isSTATUS()) {
+            v.add("Có thể sử dụng");
+        } else {
+            v.add("Không thể sử dụng");
         }
-
-        return false;
+        return v;
     }
+
 }
