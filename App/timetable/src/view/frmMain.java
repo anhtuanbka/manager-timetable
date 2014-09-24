@@ -47,29 +47,38 @@ public class frmMain extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         tbnPanel = new javax.swing.JTabbedPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuMain = new javax.swing.JMenuBar();
+        menuSystem = new javax.swing.JMenu();
+        menuILogout = new javax.swing.JMenuItem();
+        menuIExit = new javax.swing.JMenuItem();
+        menuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("System");
+        menuSystem.setText("System");
 
-        jMenuItem1.setText("Exit");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuILogout.setText("Logout");
+        menuILogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuILogoutActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuSystem.add(menuILogout);
 
-        jMenuBar1.add(jMenu1);
+        menuIExit.setText("Exit");
+        menuIExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuIExitActionPerformed(evt);
+            }
+        });
+        menuSystem.add(menuIExit);
 
-        jMenu2.setText("Help");
-        jMenuBar1.add(jMenu2);
+        menuMain.add(menuSystem);
 
-        setJMenuBar(jMenuBar1);
+        menuHelp.setText("Help");
+        menuMain.add(menuHelp);
+
+        setJMenuBar(menuMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,9 +94,15 @@ public class frmMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuIExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIExitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuIExitActionPerformed
+
+    private void menuILogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuILogoutActionPerformed
+        this.dispose();
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
+    }//GEN-LAST:event_menuILogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,11 +125,12 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenuItem menuIExit;
+    private javax.swing.JMenuItem menuILogout;
+    private javax.swing.JMenuBar menuMain;
+    private javax.swing.JMenu menuSystem;
     private javax.swing.JTabbedPane tbnPanel;
     // End of variables declaration//GEN-END:variables
 }

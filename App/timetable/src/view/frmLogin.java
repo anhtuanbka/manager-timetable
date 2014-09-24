@@ -165,7 +165,7 @@ public class frmLogin extends javax.swing.JFrame {
         if (CheckLogin.check(txtUserName.getText(), new String(txtPassword.getPassword()))) {
             frmMain frmMainForm = new frmMain();
             frmMainForm.setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Login failed!");
         }

@@ -86,6 +86,8 @@ public class frmConfigConnection extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnSave = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(java.awt.Color.blue);
         jLabel1.setText("Connection Config");
