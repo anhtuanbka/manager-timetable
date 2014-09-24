@@ -37,5 +37,11 @@ public class RoomType {
     public String getTYPE_NAME() {
         return TYPE_NAME;
     }
+
+    @Override
+    public String toString() {
+        return TYPE_NAME;
+    }
+    
     
 }
