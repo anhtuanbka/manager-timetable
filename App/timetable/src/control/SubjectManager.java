@@ -26,7 +26,7 @@ public class SubjectManager {
 
     public static List<Subject> SelectSubject() throws SQLException {
         List<Subject> SubjectsList = new ArrayList<>();
-        String sql = "SELECT * FROM SUBJECTS";
+        String sql = "SELECT * FROM SUBJECTS ORDER BY SUBJECT_ID";
         try {
             Connection cn = ConnectionManager.getConnection();
             PreparedStatement ps = cn.prepareStatement(sql);
@@ -77,6 +77,45 @@ public class SubjectManager {
         } catch (Exception e) {
         }
 
+        return false;
+    }
+        public static boolean InsertSubject(Subject subject)
+    {
+        String sql = "INSERT INTO SUBJECTS VALUES(?,?,?)";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,subject.getSUBJECT_ID());
+            ps.setString(2,subject.getSUBJECT_NAME());
+            ps.setString(3,subject.getMASTER_SUBJECT());
+            
+            int i = ps.executeUpdate();
+            if (i!=0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+    public static boolean UpdateSubject(Subject subject)
+    {
+        String sql = "UPDATE SUBJECTS SET SUBJECT_ID=?,SUBJECT_NAME=?,MASTER_SUBJECT=?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,subject.getSUBJECT_ID());
+            ps.setString(2,subject.getSUBJECT_NAME());
+            ps.setString(3,subject.getMASTER_SUBJECT());
+
+            int i = ps.executeUpdate();
+            if (i!=0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 }
