@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 import control.DevicesManager;
@@ -14,6 +13,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Device;
 import model.Room;
@@ -29,10 +30,14 @@ public final class PanelRoom extends javax.swing.JPanel {
      * Creates new form PanelRoom
      */
     DefaultTableModel dtbm = new DefaultTableModel();
+    DefaultComboBoxModel cbbRoomTypeModel = new DefaultComboBoxModel();
+    DefaultComboBoxModel cbbRoomTypeModel4S = new DefaultComboBoxModel();
+    DefaultComboBoxModel cbbRoomStatus = new DefaultComboBoxModel();
+
     public PanelRoom() {
         initComponents();
-        LoadTable();
-    }  
+        initData();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +85,7 @@ public final class PanelRoom extends javax.swing.JPanel {
             }
         ));
         tblRoomList.setNextFocusableComponent(jPanel1);
+        tblRoomList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblRoomList);
 
         cbbRoomType4S.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -88,6 +94,11 @@ public final class PanelRoom extends javax.swing.JPanel {
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Start-Menu-Search-icon.png"))); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,8 +112,8 @@ public final class PanelRoom extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbbRoomType4S, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbbStatus4S, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(cbbStatus4S, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -117,8 +128,7 @@ public final class PanelRoom extends javax.swing.JPanel {
                     .addComponent(cbbStatus4S, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
         );
 
         jScrollPane2.getAccessibleContext().setAccessibleParent(jScrollPane2);
@@ -222,25 +232,68 @@ public final class PanelRoom extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel1.getAccessibleContext().setAccessibleName(" Room List");
         jPanel1.getAccessibleContext().setAccessibleParent(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
-    public  void LoadTable()
-    {
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String roomtype = "";
+        String status = "";
+        if(!cbbRoomTypeModel4S.getSelectedItem().toString().equals("All"))
+            roomtype = cbbRoomTypeModel4S.getSelectedItem().toString();
+        if(!cbbRoomStatus.getSelectedItem().toString().equals("All"))
+            if(cbbRoomStatus.getSelectedItem().toString().equals("Có thể sử dụng"))
+                status="1";
+            else status ="0";
+        dtbm = new DefaultTableModel();
+        dtbm.addColumn("Phòng Học");
+        dtbm.addColumn("Kiểu Phòng");
+        dtbm.addColumn("Trạng Thái");
+        List<Room> list = new ArrayList<>();
+        list = RoomManager.searchRooms(txtSearch.getText(), roomtype, status);
+        for (Room room : list) {
+            dtbm.addRow(RoomManager.convertRoomToVector(room));
+        }
+        tblRoomList.setModel(dtbm);
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+    public void initData() {
         List<Room> list = new ArrayList<>();
         List<RoomType> listType = new ArrayList<>();
         List<Device> listDevice = new ArrayList<>();
-        
+//Load List room table
+
         dtbm.addColumn("Phòng Học");
-        dtbm.addColumn("Kiểu Phòng"); 
+        dtbm.addColumn("Kiểu Phòng");
         dtbm.addColumn("Trạng Thái");
-        
+
+        list = RoomManager.getAllRooms();
+        for (Room r : list) {
+            dtbm.addRow(RoomManager.convertRoomToVector(r));
+        }
         tblRoomList.setModel(dtbm);
-        
+
+//Load room type
+        listType = RoomManager.getAllRoomTypes();
+        for (RoomType rt : listType) {
+            cbbRoomTypeModel.addElement(rt);
+        }
+        cbbRoomType.setModel(cbbRoomTypeModel);
+//Load room type for search   
+        cbbRoomTypeModel4S.addElement("All");
+        for (RoomType rt : listType) {
+            cbbRoomTypeModel4S.addElement(rt);
+        }
+        cbbRoomType4S.setModel(cbbRoomTypeModel4S);
+//Load combobox status
+        cbbRoomStatus.addElement("All");
+        cbbRoomStatus.addElement("Có thể sử dụng");
+        cbbRoomStatus.addElement("Không thể sử dụng");
+        cbbStatus4S.setModel(cbbRoomStatus);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
