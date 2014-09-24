@@ -163,7 +163,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if (CheckLogin.check(txtUserName.getText(), new String(txtPassword.getPassword()))) {
-            frmMain frmMainForm = new frmMain();
+            frmMain frmMainForm = new frmMain(true);
             frmMainForm.setVisible(true);
             this.dispose();
         } else {
