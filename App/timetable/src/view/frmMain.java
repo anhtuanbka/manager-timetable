@@ -20,6 +20,10 @@ public class frmMain extends javax.swing.JFrame {
         initComponents();
         initTabPanel();   
     }
+    public frmMain(boolean isAdmin) {
+        initComponents();
+        initTabPanel();   
+    }
 
     private void initTabPanel() {
         //
