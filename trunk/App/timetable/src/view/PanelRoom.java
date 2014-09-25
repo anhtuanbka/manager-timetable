@@ -66,7 +66,7 @@ public final class PanelRoom extends javax.swing.JPanel {
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnViewDevices = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Room List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 2, 24))); // NOI18N
         jPanel1.setToolTipText("");
@@ -157,8 +157,8 @@ public final class PanelRoom extends javax.swing.JPanel {
         btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
         btnReset.setText("Reset");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Data-View-Details-icon.png"))); // NOI18N
-        jButton1.setText("View Devices");
+        btnViewDevices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Data-View-Details-icon.png"))); // NOI18N
+        btnViewDevices.setText("View Devices");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -185,7 +185,7 @@ public final class PanelRoom extends javax.swing.JPanel {
                         .addComponent(btnInsert)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelete))
-                    .addComponent(jButton1))
+                    .addComponent(btnViewDevices))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnUpdate)
@@ -207,7 +207,7 @@ public final class PanelRoom extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(cbbRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReset)
-                    .addComponent(jButton1))
+                    .addComponent(btnViewDevices))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbStatus)
@@ -294,6 +294,11 @@ public final class PanelRoom extends javax.swing.JPanel {
         cbbRoomStatus.addElement("Có thể sử dụng");
         cbbRoomStatus.addElement("Không thể sử dụng");
         cbbStatus4S.setModel(cbbRoomStatus);
+//Set button
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+//        btnReset.setEnabled(false);
+        btnViewDevices.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -302,11 +307,11 @@ public final class PanelRoom extends javax.swing.JPanel {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnViewDevices;
     private javax.swing.JCheckBox cbStatus;
     private javax.swing.JComboBox cbbRoomType;
     private javax.swing.JComboBox cbbRoomType4S;
     private javax.swing.JComboBox cbbStatus4S;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
