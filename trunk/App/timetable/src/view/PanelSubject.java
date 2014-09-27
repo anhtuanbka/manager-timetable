@@ -66,12 +66,13 @@ public class PanelSubject extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jtxtSubjectID = new javax.swing.JTextField();
-        jBClear = new javax.swing.JButton();
         jtxtMaster = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jBadd = new javax.swing.JButton();
         jBDelete = new javax.swing.JButton();
         jBSave = new javax.swing.JButton();
         jBCancel = new javax.swing.JButton();
+        jBReload = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Search"));
 
@@ -171,14 +172,14 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jtxtSubjectID.setEnabled(false);
 
-        jBClear.setText("Clear TextField");
-        jBClear.addActionListener(new java.awt.event.ActionListener() {
+        jtxtMaster.setEnabled(false);
+
+        jButton1.setText("xóa nhanh chi tiết");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBClearActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        jtxtMaster.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,10 +197,10 @@ public class PanelSubject extends javax.swing.JPanel {
                 .addGap(59, 59, 59)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBClear))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtxtSubjectName, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,11 +212,11 @@ public class PanelSubject extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtMaster, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jBClear)))
-                .addGap(32, 32, 32))
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jtxtMaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jBadd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-icon.png"))); // NOI18N
@@ -295,6 +296,13 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jPanel3.getAccessibleContext().setAccessibleDescription("");
 
+        jBReload.setText("Reset Table");
+        jBReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -305,12 +313,18 @@ public class PanelSubject extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 151, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jBReload, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBReload, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -453,9 +467,10 @@ public class PanelSubject extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jBDeleteActionPerformed
 
-    private void jBClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearActionPerformed
-        setTextFieldtoNull();
-    }//GEN-LAST:event_jBClearActionPerformed
+    private void jBReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReloadActionPerformed
+        reset();
+        LoadTable();
+    }//GEN-LAST:event_jBReloadActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int index = jTable1.getSelectedRow();
@@ -464,6 +479,10 @@ public class PanelSubject extends javax.swing.JPanel {
         Subject item = SubjectManager.GetSubjectbyID(subjectID);
         loadtoTextField(item);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    setTextFieldtoNull();
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void loadtoTextField(Subject subject) {
         jtxtSubjectID.setText(subject.getSUBJECT_ID());
         jtxtMaster.setText(subject.getMASTER_SUBJECT());
@@ -580,12 +599,13 @@ public class PanelSubject extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancel;
-    private javax.swing.JButton jBClear;
     private javax.swing.JButton jBDelete;
     private javax.swing.JButton jBEdit;
+    private javax.swing.JButton jBReload;
     private javax.swing.JButton jBSave;
     private javax.swing.JButton jBSearch;
     private javax.swing.JButton jBadd;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
