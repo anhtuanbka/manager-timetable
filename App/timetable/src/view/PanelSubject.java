@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Subject;
 
@@ -25,10 +27,19 @@ public class PanelSubject extends javax.swing.JPanel {
      * Creates new form PanelSubject
      */
     DefaultTableModel dtbm = new DefaultTableModel();
+    boolean Insert;
+    boolean Edit;
+    DefaultComboBoxModel cbbSubjectSearch = new DefaultComboBoxModel();
 
     public PanelSubject() {
         initComponents();
         LoadTable();
+        jBSave.setEnabled(false);
+        jBCancel.setEnabled(false);
+        cbbSubjectSearch.addElement("Mã môn học");
+        cbbSubjectSearch.addElement("Tên môn học");
+        cbbSubjectSearch.addElement("Bộ môn");
+        jComboSearch.setModel(cbbSubjectSearch);
     }
 
     /**
@@ -41,21 +52,22 @@ public class PanelSubject extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        jtxtSearch = new javax.swing.JTextField();
+        jComboSearch = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        jBSearch = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jBEdit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jtxtsubject = new javax.swing.JTextField();
+        jtxtSubjectName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jtxtSubjectID = new javax.swing.JTextField();
-        jtxtMaster = new javax.swing.JPasswordField();
+        jBClear = new javax.swing.JButton();
+        jtxtMaster = new javax.swing.JTextField();
         jBadd = new javax.swing.JButton();
         jBDelete = new javax.swing.JButton();
         jBSave = new javax.swing.JButton();
@@ -63,28 +75,28 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Search"));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jtxtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jtxtSearchActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SUBJECT_ID", "SUBJECT_NAME", "MASTER_SUBJECT" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item1", "Item2", "Item3" }));
+        jComboSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboSearchActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Tìm với");
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Start-Menu-Search-icon.png"))); // NOI18N
-        jButton6.setText("Tìm");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jBSearch.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jBSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Start-Menu-Search-icon.png"))); // NOI18N
+        jBSearch.setText("Tìm");
+        jBSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jBSearchActionPerformed(evt);
             }
         });
 
@@ -94,13 +106,13 @@ public class PanelSubject extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(jBSearch)
                 .addGap(9, 9, 9))
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,11 +121,11 @@ public class PanelSubject extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1)
+                    .addComponent(jComboSearch)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -132,6 +144,11 @@ public class PanelSubject extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
@@ -146,7 +163,7 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jLabel2.setText("Tên Môn Học");
 
-        jtxtsubject.setEnabled(false);
+        jtxtSubjectName.setEnabled(false);
 
         jLabel3.setText("Bộ Môn");
 
@@ -154,48 +171,51 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jtxtSubjectID.setEnabled(false);
 
-        jtxtMaster.setEnabled(false);
-        jtxtMaster.addActionListener(new java.awt.event.ActionListener() {
+        jBClear.setText("Clear TextField");
+        jBClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtMasterActionPerformed(evt);
+                jBClearActionPerformed(evt);
             }
         });
+
+        jtxtMaster.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(64, 64, 64)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jtxtsubject, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtxtSubjectID, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jtxtMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jtxtSubjectID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBClear))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtsubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jtxtSubjectID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtSubjectID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtxtMaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtxtMaster, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jBClear)))
+                .addGap(32, 32, 32))
         );
 
         jBadd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-icon.png"))); // NOI18N
@@ -208,6 +228,11 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jBDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         jBDelete.setText("Xóa");
+        jBDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDeleteActionPerformed(evt);
+            }
+        });
 
         jBSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         jBSave.setText("Lưu Lại");
@@ -228,7 +253,7 @@ public class PanelSubject extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -236,7 +261,7 @@ public class PanelSubject extends javax.swing.JPanel {
                         .addComponent(jBSave)
                         .addGap(140, 140, 140)
                         .addComponent(jBCancel)
-                        .addGap(0, 168, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -280,7 +305,7 @@ public class PanelSubject extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,62 +317,170 @@ public class PanelSubject extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditActionPerformed
-       int index = jTable1.getSelectedRow();
-        
-        Vector Row = (Vector) dtbm.getDataVector().get(index);
-       
-        for (int i = 0; i < Row.size(); i++) {
-             System.out.println(Row.get(i));
-        }
-        //int CurrentID = Integer.parseInt(Row.get(0).toString());
-        System.out.println(index);
-        System.out.println(Row.size());
+        jBadd.setEnabled(false);
+        jBEdit.setEnabled(false);
+        jBDelete.setEnabled(false);
+        jBSave.setEnabled(true);
+        jBCancel.setEnabled(true);
+        setTextField(true);
+        jtxtSubjectID.setEnabled(true);
+//        setTextFieldtoNull();
+        Edit = true;
+//        int index = jTable1.getSelectedRow();
+//
+//        Vector Row = (Vector) dtbm.getDataVector().get(index);
+//
+//        for (int i = 0; i < Row.size(); i++) {
+//            System.out.println(Row.get(i));
+//        }
+//        int CurrentID = Integer.parseInt(Row.get(0).toString());
+//        System.out.println(index);
+//        System.out.println(Row.size());
     }//GEN-LAST:event_jBEditActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jtxtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtxtSearchActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboSearchActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-   
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
+        reset();
+        dtbm.addColumn("Mã Môn Học");
+        dtbm.addColumn("Tên Môn Học");
+        dtbm.addColumn("Bộ Môn");
+        List<Subject> list = new ArrayList<>();
+        if (jComboSearch.getSelectedItem().toString().equals("Tên môn học")) {
+            try {
+                list = SubjectManager.searchSubjectbyName(jtxtSearch.getText());
+                for (Subject subject : list) {
+                    Vector v = new Vector();
+                    v.add(subject.getSUBJECT_ID());
+                    v.add(subject.getSUBJECT_NAME());
+                    v.add(subject.getMASTER_SUBJECT());
+                    dtbm.addRow(v);
+                }
+                jTable1.setModel(dtbm);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelSubject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        if (jComboSearch.getSelectedItem().toString().equals("Mã môn học")) {
+            try {
+                list = SubjectManager.searchSubjectbyID(jtxtSearch.getText());
+                for (Subject subject : list) {
+                    Vector v = new Vector();
+                    v.add(subject.getSUBJECT_ID());
+                    v.add(subject.getSUBJECT_NAME());
+                    v.add(subject.getMASTER_SUBJECT());
+                    dtbm.addRow(v);
+                }
+                jTable1.setModel(dtbm);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelSubject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        if (jComboSearch.getSelectedItem().toString().equals("Bộ môn")) {
+            try {
+                list = SubjectManager.searchSubjectbyID(jtxtSearch.getText());
+                for (Subject subject : list) {
+                    Vector v = new Vector();
+                    v.add(subject.getSUBJECT_ID());
+                    v.add(subject.getSUBJECT_NAME());
+                    v.add(subject.getMASTER_SUBJECT());
+                    dtbm.addRow(v);
+                }
+                jTable1.setModel(dtbm);
+            } catch (SQLException ex) {
+                Logger.getLogger(PanelSubject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_jBSearchActionPerformed
 
     private void jBaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaddActionPerformed
         jBadd.setEnabled(false);
         jBEdit.setEnabled(false);
         jBDelete.setEnabled(false);
+        jBSave.setEnabled(true);
+        jBCancel.setEnabled(true);
         setTextField(true);
         setTextFieldtoNull();
+        Insert = true;
     }//GEN-LAST:event_jBaddActionPerformed
 
-    private void jtxtMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtMasterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtMasterActionPerformed
-
     private void jBCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelActionPerformed
-        // TODO add your handling code here:
+//        setTextFieldtoNull();
+        jBadd.setEnabled(true);
+        jBEdit.setEnabled(true);
+        jBDelete.setEnabled(true);
+        jBSave.setEnabled(false);
+        jBCancel.setEnabled(false);
+        setTextField(false);
+        Edit = false;
+        Insert = false;
     }//GEN-LAST:event_jBCancelActionPerformed
 
     private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
-        // TODO add your handling code here:
+        if (Edit) {
+            editSubject();
+            reset();
+            LoadTable();
+        }
+        if (Insert) {
+            insertSubject();
+            reset();
+            LoadTable();
+        }
     }//GEN-LAST:event_jBSaveActionPerformed
+
+    private void jBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteActionPerformed
+        jBadd.setEnabled(true);
+        jBEdit.setEnabled(true);
+        jBDelete.setEnabled(true);
+        jBSave.setEnabled(false);
+        jBCancel.setEnabled(false);
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa môn học có mã môn học là " + jtxtSubjectID.getText() + "?", "Cảnh Báo", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            SubjectManager.DeleteSubject(jtxtSubjectID.getText());
+            setTextFieldtoNull();
+            reset();
+            LoadTable();
+        }
+    }//GEN-LAST:event_jBDeleteActionPerformed
+
+    private void jBClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClearActionPerformed
+        setTextFieldtoNull();
+    }//GEN-LAST:event_jBClearActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int index = jTable1.getSelectedRow();
+        Vector Row = (Vector) dtbm.getDataVector().get(index);
+        String subjectID = Row.get(0).toString();
+        Subject item = SubjectManager.GetSubjectbyID(subjectID);
+        loadtoTextField(item);
+    }//GEN-LAST:event_jTable1MouseClicked
+    private void loadtoTextField(Subject subject) {
+        jtxtSubjectID.setText(subject.getSUBJECT_ID());
+        jtxtMaster.setText(subject.getMASTER_SUBJECT());
+        jtxtSubjectName.setText(subject.getSUBJECT_NAME());
+    }
 
     public void LoadTable() {
         List<Subject> list = new ArrayList<>();
-
-        dtbm.addColumn("Tên Môn Học");
         dtbm.addColumn("Mã Môn Học");
+        dtbm.addColumn("Tên Môn Học");
         dtbm.addColumn("Bộ Môn");
         try {
             list = SubjectManager.SelectSubject();
             for (Subject subject : list) {
                 Vector v = new Vector();
-                v.add(subject.getSUBJECT_NAME());
                 v.add(subject.getSUBJECT_ID());
+                v.add(subject.getSUBJECT_NAME());
                 v.add(subject.getMASTER_SUBJECT());
                 dtbm.addRow(v);
             }
@@ -356,28 +489,104 @@ public class PanelSubject extends javax.swing.JPanel {
             Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void reset(){
-    dtbm.setColumnCount(0);
-    }
-    private void setTextField(boolean settextfield){
-    jtxtSubjectID.setEnabled(settextfield);
-    jtxtsubject.setEnabled(settextfield);
-    jtxtMaster.setEnabled(settextfield);
-    }
-    private void setTextFieldtoNull(){
-    jtxtMaster.setText("");
-    jtxtSubjectID.setText("");
-    jtxtsubject.setText("");
+
+    private void reset() {
+        dtbm.setRowCount(0);
+        dtbm.setColumnCount(0);
     }
 
+    private void setTextField(boolean settextfield) {
+        jtxtSubjectID.setEnabled(settextfield);
+        jtxtSubjectName.setEnabled(settextfield);
+        jtxtMaster.setEnabled(settextfield);
+    }
+
+    private void setTextFieldtoNull() {
+        jtxtMaster.setText("");
+        jtxtSubjectID.setText("");
+        jtxtSubjectName.setText("");
+    }
+
+    private String checkTextField() {
+        String Error = "";
+        if (jtxtSubjectID.getText().equals("")) {
+            Error += "Mã môn học không được để trống\n";
+        }
+        if (jtxtSubjectName.getText().equals("")) {
+            Error += "Môn học không được để trống\n";
+        }
+        if (jtxtMaster.getText().equals("")) {
+            Error += "Bộ môn không được để trống";
+        }
+        return Error;
+    }
+
+    private void insertSubject() {
+        String Error = checkTextField();
+        String Error2 = "";
+        if (Error.equals("") == true) {
+            if (SubjectManager.checkSubjectID(jtxtSubjectID.getText())) {
+                Error2 += "Mã môn học đã tồn tại\n";
+            }
+            if (SubjectManager.checkSubjectName(jtxtSubjectName.getText())) {
+                Error2 += "Tên môn học đã tồn tại\n";
+            }
+            if (Error2.equals("") == true) {
+                Subject subject = new Subject();
+                subject.setSUBJECT_ID(jtxtSubjectID.getText());
+                subject.setSUBJECT_NAME(jtxtSubjectName.getText());
+                subject.setMASTER_SUBJECT(jtxtMaster.getText());
+                boolean test = SubjectManager.InsertSubject(subject);
+                if (test) {
+                    JOptionPane.showMessageDialog(this, "Thêm môn học thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm môn học thất bại");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, Error2);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, Error);
+        }
+    }
+
+    private void editSubject() {
+        Subject item = SubjectManager.GetSubjectbyID(jtxtSubjectID.getText());
+        String Older = "";
+        Older = item.getSUBJECT_NAME();
+        String Error = checkTextField();
+        if (Error.equals("")) {
+            if (SubjectManager.checkSubjectID(jtxtSubjectID.getText())) {
+                if (jtxtSubjectName.getText().equals(Older) == false && SubjectManager.checkSubjectName(jtxtSubjectName.getText())) {
+                    JOptionPane.showMessageDialog(this, "Tên môn học đã tồn tại");
+                } else {
+                    Subject subject = new Subject();
+                    subject.setSUBJECT_ID(jtxtSubjectID.getText());
+                    subject.setSUBJECT_NAME(jtxtSubjectName.getText());
+                    subject.setMASTER_SUBJECT(jtxtMaster.getText());
+                    boolean test = SubjectManager.UpdateSubject(subject);
+                    if (test) {
+                        JOptionPane.showMessageDialog(this, "Chỉnh sửa thành công");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Chỉnh sửa thất bại");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Mã môn học không tồn tại");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, Error);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancel;
+    private javax.swing.JButton jBClear;
     private javax.swing.JButton jBDelete;
     private javax.swing.JButton jBEdit;
     private javax.swing.JButton jBSave;
+    private javax.swing.JButton jBSearch;
     private javax.swing.JButton jBadd;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -387,9 +596,9 @@ public class PanelSubject extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JPasswordField jtxtMaster;
+    private javax.swing.JTextField jtxtMaster;
+    private javax.swing.JTextField jtxtSearch;
     private javax.swing.JTextField jtxtSubjectID;
-    private javax.swing.JTextField jtxtsubject;
+    private javax.swing.JTextField jtxtSubjectName;
     // End of variables declaration//GEN-END:variables
 }
