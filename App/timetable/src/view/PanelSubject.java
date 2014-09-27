@@ -576,7 +576,7 @@ public class PanelSubject extends javax.swing.JPanel {
         String Error = checkTextField();
         if (Error.equals("")) {
             if (SubjectManager.checkSubjectID(jtxtSubjectID.getText())) {
-                if (jtxtSubjectName.getText().equals(Older) == false && SubjectManager.checkSubjectName(jtxtSubjectName.getText())) {
+                if (jtxtSubjectName.getText().equalsIgnoreCase(Older) == false && SubjectManager.checkSubjectName(jtxtSubjectName.getText())) {
                     JOptionPane.showMessageDialog(this, "Tên môn học đã tồn tại");
                 } else {
                     Subject subject = new Subject();
