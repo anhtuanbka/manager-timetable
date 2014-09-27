@@ -400,7 +400,7 @@ public class PanelSubject extends javax.swing.JPanel {
         }
         if (jComboSearch.getSelectedItem().toString().equals("Bộ môn")) {
             try {
-                list = SubjectManager.searchSubjectbyID(jtxtSearch.getText());
+                list = SubjectManager.searchSubjectbyMaster(jtxtSearch.getText());
                 for (Subject subject : list) {
                     Vector v = new Vector();
                     v.add(subject.getSUBJECT_ID());
