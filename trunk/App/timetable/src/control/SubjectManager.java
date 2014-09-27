@@ -44,7 +44,7 @@ public class SubjectManager {
         return SubjectsList;
     }
 
-    public static List<Subject> searchSubjectByname(String stringInput) throws SQLException {
+    public static List<Subject> searchSubjectbyName(String stringInput) throws SQLException {
         List<Subject> SubjectList = new ArrayList<>();
         String sql = "SELECT * FROM SUBJECTS WHERE SUBJECT_NAME LIKE ?";
         Connection cn = ConnectionManager.getConnection();
@@ -63,9 +63,45 @@ public class SubjectManager {
 
     }
 
+    public static List<Subject> searchSubjectbyID(String stringInput) throws SQLException {
+        List<Subject> SubjectList = new ArrayList<>();
+        String sql = "SELECT * FROM SUBJECTS WHERE SUBJECT_ID LIKE ?";
+        Connection cn = ConnectionManager.getConnection();
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setString(1, "%" + stringInput + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Subject subject = new Subject();
+            subject.setSUBJECT_ID(rs.getString("SUBJECT_ID"));
+            subject.setSUBJECT_NAME(rs.getString("SUBJECT_NAME"));
+            subject.setMASTER_SUBJECT(rs.getString("MASTER_SUBJECT"));
+            SubjectList.add(subject);
+        }
+        return SubjectList;
+
+    }
+
+    public static List<Subject> searchSubjectbyMaster(String stringInput) throws SQLException {
+        List<Subject> SubjectList = new ArrayList<>();
+        String sql = "SELECT * FROM SUBJECTS WHERE MASTER_SUBJECT LIKE ?";
+        Connection cn = ConnectionManager.getConnection();
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setString(1, "%" + stringInput + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Subject subject = new Subject();
+            subject.setSUBJECT_ID(rs.getString("SUBJECT_ID"));
+            subject.setSUBJECT_NAME(rs.getString("SUBJECT_NAME"));
+            subject.setMASTER_SUBJECT(rs.getString("MASTER_SUBJECT"));
+            SubjectList.add(subject);
+        }
+        return SubjectList;
+
+    }
+
     public static boolean DeleteSubject(String ID) {
 
-        String sql = "DELETE FROM SUBJECTS WHERE ROOM_ID =?";
+        String sql = "DELETE FROM SUBJECTS WHERE SUBJECT_ID=?";
         Connection conn = ConnectionManager.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -79,43 +115,93 @@ public class SubjectManager {
 
         return false;
     }
-        public static boolean InsertSubject(Subject subject)
-    {
+
+    public static boolean InsertSubject(Subject subject) {
         String sql = "INSERT INTO SUBJECTS VALUES(?,?,?)";
         Connection conn = ConnectionManager.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,subject.getSUBJECT_ID());
-            ps.setString(2,subject.getSUBJECT_NAME());
-            ps.setString(3,subject.getMASTER_SUBJECT());
-            
+            ps.setString(1, subject.getSUBJECT_ID());
+            ps.setString(2, subject.getSUBJECT_NAME());
+            ps.setString(3, subject.getMASTER_SUBJECT());
             int i = ps.executeUpdate();
-            if (i!=0) {
+            if (i != 0) {
                 return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
-    public static boolean UpdateSubject(Subject subject)
-    {
-        String sql = "UPDATE SUBJECTS SET SUBJECT_ID=?,SUBJECT_NAME=?,MASTER_SUBJECT=?";
+
+    public static boolean UpdateSubject(Subject subject) {
+        String sql = "UPDATE SUBJECTS SET SUBJECT_NAME=?,MASTER_SUBJECT=? WHERE SUBJECT_ID=?";
         Connection conn = ConnectionManager.getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,subject.getSUBJECT_ID());
-            ps.setString(2,subject.getSUBJECT_NAME());
-            ps.setString(3,subject.getMASTER_SUBJECT());
-
+            ps.setString(1, subject.getSUBJECT_NAME());
+            ps.setString(2, subject.getMASTER_SUBJECT());
+            ps.setString(3, subject.getSUBJECT_ID());
             int i = ps.executeUpdate();
-            if (i!=0) {
+            if (i != 0) {
                 return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public static boolean checkSubjectID(String subjectID) {
+        String sql = "SELECT * FROM SUBJECTS WHERE SUBJECT_ID=?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, subjectID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean checkSubjectName(String subjectName) {
+        String sql = "SELECT * FROM SUBJECTS WHERE SUBJECT_NAME=?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, subjectName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static Subject GetSubjectbyID(String subject) {
+        Subject item = new Subject();
+        String sql = "SELECT * FROM SUBJECTS WHERE SUBJECT_ID=?";
+        Connection conn = ConnectionManager.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, subject);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                item.setSUBJECT_ID(rs.getString("SUBJECT_ID"));
+                item.setMASTER_SUBJECT(rs.getString("MASTER_SUBJECT"));
+                item.setSUBJECT_NAME(rs.getString("SUBJECT_NAME"));
+            }
+        } catch (Exception e) {
+        }
+        return item;
+
     }
 }
