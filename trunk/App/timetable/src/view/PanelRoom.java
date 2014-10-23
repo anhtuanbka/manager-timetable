@@ -86,6 +86,11 @@ public final class PanelRoom extends javax.swing.JPanel {
         ));
         tblRoomList.setNextFocusableComponent(jPanel1);
         tblRoomList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblRoomList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRoomListMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblRoomList);
 
         cbbRoomType4S.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -261,6 +266,20 @@ public final class PanelRoom extends javax.swing.JPanel {
         tblRoomList.setModel(dtbm);
 
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void tblRoomListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoomListMouseClicked
+        if(tblRoomList.getSelectedRows().length==0) return;
+        String id = (String) tblRoomList.getModel().getValueAt(tblRoomList.getSelectedRow(), 0);
+        List<Room> list = RoomManager.searchRooms(id, "", "");
+        Room r = list.get(0);
+        txtRoomID.setText(id);
+        for (int i = 0; i < cbbRoomType.getItemCount(); i++) {
+            if(((RoomType)cbbRoomType.getItemAt(i)).getTYPE_NAME().equals(r.getTYPE_ID())){
+                cbbRoomType.setSelectedIndex(i);
+                return;
+            }
+        }
+    }//GEN-LAST:event_tblRoomListMouseClicked
     public void initData() {
         List<Room> list = new ArrayList<>();
         List<RoomType> listType = new ArrayList<>();
