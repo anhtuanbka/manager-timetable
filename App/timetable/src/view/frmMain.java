@@ -6,6 +6,11 @@
 
 package view;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
 
 /**
  *
@@ -50,6 +55,9 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        pnlBanner = new javax.swing.JPanel();
+        lblBannerImg = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         tbnPanel = new javax.swing.JTabbedPane();
         menuMain = new javax.swing.JMenuBar();
         menuSystem = new javax.swing.JMenu();
@@ -58,6 +66,14 @@ public class frmMain extends javax.swing.JFrame {
         menuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        pnlBanner.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBanner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBannerImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Fotor01021103644.png"))); // NOI18N
+        pnlBanner.add(lblBannerImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jScrollPane1.setViewportView(tbnPanel);
 
         menuSystem.setText("System");
 
@@ -88,11 +104,15 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+            .addComponent(pnlBanner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlBanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,12 +149,15 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblBannerImg;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuIExit;
     private javax.swing.JMenuItem menuILogout;
     private javax.swing.JMenuBar menuMain;
     private javax.swing.JMenu menuSystem;
+    private javax.swing.JPanel pnlBanner;
     private javax.swing.JTabbedPane tbnPanel;
     // End of variables declaration//GEN-END:variables
 }
