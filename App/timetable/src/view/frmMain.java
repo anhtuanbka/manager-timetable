@@ -43,6 +43,9 @@ public class frmMain extends javax.swing.JFrame {
         
         PanelUser pnu = new PanelUser();
         tbnPanel.addTab("USERS", pnu);
+        
+        PanelDevice pnd = new PanelDevice();
+        tbnPanel.addTab("DEVICES", pnd);
     }
 
     /**

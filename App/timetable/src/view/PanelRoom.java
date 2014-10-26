@@ -5,8 +5,10 @@
  */
 package view;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import control.DevicesManager;
 import control.RoomManager;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,21 @@ public final class PanelRoom extends javax.swing.JPanel {
                 tblRoomListMouseClicked(evt);
             }
         });
+        tblRoomList.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblRoomListKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblRoomListKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblRoomList);
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
 
         cbbRoomType4S.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -140,10 +156,13 @@ public final class PanelRoom extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 2, 24))); // NOI18N
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Room ID");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Room type");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Status");
 
         cbStatus.setText("Usable");
@@ -152,15 +171,35 @@ public final class PanelRoom extends javax.swing.JPanel {
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-icon.png"))); // NOI18N
         btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
         btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         btnViewDevices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Data-View-Details-icon.png"))); // NOI18N
         btnViewDevices.setText("View Devices");
@@ -248,12 +287,21 @@ public final class PanelRoom extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String roomtype = "";
         String status = "";
-        if(!cbbRoomTypeModel4S.getSelectedItem().toString().equals("All"))
+        if (!cbbRoomTypeModel4S.getSelectedItem().toString().equals("All")) {
             roomtype = cbbRoomTypeModel4S.getSelectedItem().toString();
-        if(!cbbRoomStatus.getSelectedItem().toString().equals("All"))
-            if(cbbRoomStatus.getSelectedItem().toString().equals("Có thể sử dụng"))
-                status="1";
-            else status ="0";
+        }
+        if (!cbbRoomStatus.getSelectedItem().toString().equals("All")) {
+            if (cbbRoomStatus.getSelectedItem().toString().equals("Có thể sử dụng")) {
+                status = "1";
+            } else {
+                status = "0";
+            }
+        }
+        loadDataRoomTable(roomtype, status);
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void loadDataRoomTable(String roomtype, String status) {
         dtbm = new DefaultTableModel();
         dtbm.addColumn("Phòng Học");
         dtbm.addColumn("Kiểu Phòng");
@@ -264,22 +312,79 @@ public final class PanelRoom extends javax.swing.JPanel {
             dtbm.addRow(RoomManager.convertRoomToVector(room));
         }
         tblRoomList.setModel(dtbm);
-
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }
 
     private void tblRoomListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoomListMouseClicked
-        if(tblRoomList.getSelectedRows().length==0) return;
-        String id = (String) tblRoomList.getModel().getValueAt(tblRoomList.getSelectedRow(), 0);
-        List<Room> list = RoomManager.searchRooms(id, "", "");
-        Room r = list.get(0);
-        txtRoomID.setText(id);
-        for (int i = 0; i < cbbRoomType.getItemCount(); i++) {
-            if(((RoomType)cbbRoomType.getItemAt(i)).getTYPE_NAME().equals(r.getTYPE_ID())){
-                cbbRoomType.setSelectedIndex(i);
-                return;
-            }
-        }
+        loadDataToControl();
     }//GEN-LAST:event_tblRoomListMouseClicked
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtRoomID.setText("");
+       // txtRoomID.setEditable(true);
+        cbbRoomType.setSelectedIndex(0);
+        cbStatus.setSelected(false);
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnViewDevices.setEnabled(false);
+        tblRoomList.clearSelection();
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void tblRoomListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblRoomListKeyPressed
+//        if ((evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
+//            loadDataToControl();
+//        }
+    }//GEN-LAST:event_tblRoomListKeyPressed
+
+    private void tblRoomListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblRoomListKeyReleased
+        if ((evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
+            loadDataToControl();
+        }
+    }//GEN-LAST:event_tblRoomListKeyReleased
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if (tblRoomList.getSelectedRows().length == 0) {
+            return;
+        }
+        if (!isRoomValidated()) {
+            return;
+        }
+        if (RoomManager.updateRoom(new Room(txtRoomID.getText(), ((RoomType) cbbRoomType.getSelectedItem()).getTYPE_ID(), cbStatus.isSelected()))) {
+            JOptionPane.showMessageDialog(null, "Update completed");
+        } else {
+            JOptionPane.showMessageDialog(null, "Update failed");
+        }
+        loadDataRoomTable("", "");
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        if (!isRoomValidated()) {
+            return;
+        }
+
+        if (RoomManager.insertNewRoom(new Room(txtRoomID.getText(), ((RoomType) cbbRoomType.getSelectedItem()).getTYPE_ID(), cbStatus.isSelected()))) {
+            JOptionPane.showMessageDialog(null, "Insert completed");
+        } else {
+            JOptionPane.showMessageDialog(null, "Insert failed");
+        }
+        loadDataRoomTable("", "");
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            btnSearchActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (tblRoomList.getSelectedRows().length == 0) {
+            return;
+        }
+        if(JOptionPane.showConfirmDialog(null, "Are u sure?")==JOptionPane.YES_OPTION){
+            RoomManager.deleteRoomByID(txtRoomID.getText());
+            loadDataRoomTable("", "");
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
     public void initData() {
         List<Room> list = new ArrayList<>();
         List<RoomType> listType = new ArrayList<>();
@@ -298,6 +403,7 @@ public final class PanelRoom extends javax.swing.JPanel {
 
 //Load room type
         listType = RoomManager.getAllRoomTypes();
+        cbbRoomTypeModel.addElement("Select");
         for (RoomType rt : listType) {
             cbbRoomTypeModel.addElement(rt);
         }
@@ -341,4 +447,41 @@ public final class PanelRoom extends javax.swing.JPanel {
     private javax.swing.JTextField txtRoomID;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataToControl() {
+        if (tblRoomList.getSelectedRows().length == 0) {
+            return;
+        }
+        String id = (String) tblRoomList.getModel().getValueAt(tblRoomList.getSelectedRow(), 0);
+        List<Room> list = RoomManager.searchRooms(id, "", "");
+        Room r = list.get(0);
+        txtRoomID.setText(id);
+        for (int i = 1; i <= cbbRoomType.getItemCount(); i++) {
+            if (((RoomType) cbbRoomType.getItemAt(i)).getTYPE_NAME().equals(r.getTYPE_ID())) {
+                cbbRoomType.setSelectedIndex(i);
+                break;
+            }
+        }
+        if (r.isSTATUS()) {
+            cbStatus.setSelected(true);
+        } else {
+            cbStatus.setSelected(false);
+        }
+        //txtRoomID.setEditable(false);
+        btnDelete.setEnabled(true);
+        btnUpdate.setEnabled(true);
+        btnViewDevices.setEnabled(true);
+    }
+
+    private boolean isRoomValidated() {
+        if (txtRoomID.getText() == null || txtRoomID.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Room ID is null or empty");
+            return false;
+        }
+        if (cbbRoomType.getSelectedIndex() > 0) {
+            JOptionPane.showMessageDialog(null, "Room type is invalid");
+            return false;
+        }
+        return true;
+    }
 }
