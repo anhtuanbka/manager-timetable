@@ -10,82 +10,46 @@ package model;
  * @author VuDucCanh
  */
 public class Device {
-
-    private String ROOM_ID;
-    private int COMPUTERS;
-    private int LAMPS;
-    private int TABLES;
-    private int CHAIRS;
-    private int CELLING_FANS;
-    private int PROJECTORS;
-
-    public Device(String ROOM_ID, int COMPUTERS, int LAMPS, int TABLES, int CHAIRS, int CELLING_FANS, int PROJECTORS) {
-        this.ROOM_ID = ROOM_ID;
-        this.COMPUTERS = COMPUTERS;
-        this.LAMPS = LAMPS;
-        this.TABLES = TABLES;
-        this.CHAIRS = CHAIRS;
-        this.CELLING_FANS = CELLING_FANS;
-        this.PROJECTORS = PROJECTORS;
-    }
+    private int deviceID;
+    private String deviceName;
+    private String description;
 
     public Device() {
     }
 
-    public void setROOM_ID(String ROOM_ID) {
-        this.ROOM_ID = ROOM_ID;
+    public Device(String deviceName, String description) {
+        this.deviceName = deviceName;
+        this.description = description;
     }
 
-    public void setCOMPUTERS(int COMPUTERS) {
-        this.COMPUTERS = COMPUTERS;
+    public int getDeviceID() {
+        return deviceID;
     }
 
-    public void setLAMPS(int LAMPS) {
-        this.LAMPS = LAMPS;
+    public void setDeviceID(int deviceID) {
+        this.deviceID = deviceID;
     }
 
-    public void setTABLES(int TABLES) {
-        this.TABLES = TABLES;
+    public String getDeviceName() {
+        return deviceName;
     }
 
-    public void setCHAIRS(int CHAIRS) {
-        this.CHAIRS = CHAIRS;
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
 
-    public void setCELLING_FANS(int CELLING_FANS) {
-        this.CELLING_FANS = CELLING_FANS;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPROJECTORS(int PROJECTORS) {
-        this.PROJECTORS = PROJECTORS;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getROOM_ID() {
-        return ROOM_ID;
+    @Override
+    public String toString() {
+        return "Device{" + "deviceName=" + deviceName + '}';
     }
-
-    public int getCOMPUTERS() {
-        return COMPUTERS;
-    }
-
-    public int getLAMPS() {
-        return LAMPS;
-    }
-
-    public int getTABLES() {
-        return TABLES;
-    }
-
-    public int getCHAIRS() {
-        return CHAIRS;
-    }
-
-    public int getCELLING_FANS() {
-        return CELLING_FANS;
-    }
-
-    public int getPROJECTORS() {
-        return PROJECTORS;
-    }
-
+    
+    
 }
