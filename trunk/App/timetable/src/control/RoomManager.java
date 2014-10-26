@@ -80,7 +80,7 @@ public class RoomManager {
         ResultSet rs = null;
         try {
             conn = ConnectionManager.getConnection();
-            pstm = conn.prepareStatement("select * from ROOMS,ROOMTYPES where STATUS like '%"+status +"%' and ROOMTYPES.TYPE_NAME like N'%"+roomtype +"%' and ROOM_ID like '%"+roomid +"%' and ROOMS.TYPE_ID=ROOMTYPES.TYPE_ID");
+            pstm = conn.prepareStatement("select * from ROOMS,ROOMTYPES where STATUS like '%" + status + "%' and ROOMTYPES.TYPE_NAME like N'%" + roomtype + "%' and ROOM_ID like '%" + roomid + "%' and ROOMS.TYPE_ID=ROOMTYPES.TYPE_ID");
             //pstm.setString(1, status);
             //pstm.setString(2, roomtype);
             //pstm.setString(3, roomid);
@@ -90,11 +90,73 @@ public class RoomManager {
             }
         } catch (SQLException ex) {
             Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             ConnectionManager.closeAll(conn, pstm, rs);
         }
 
         return listRoom;
+    }
+
+    public static boolean insertNewRoom(Room r) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        int rs = 0;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            pstm = conn.prepareStatement("insert into ROOMS(ROOM_ID,TYPE_ID,STATUS) values (?,?,?)");
+            pstm.setString(1, r.getROOM_ID());
+            pstm.setInt(2, Integer.parseInt(r.getTYPE_ID()));
+            pstm.setBoolean(3, r.isSTATUS());
+            rs=pstm.executeUpdate();
+            if(rs==0) return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }finally{
+            ConnectionManager.closeAll(conn, pstm, null);
+        }
+        return true;
+    }
+    
+    public static boolean updateRoom(Room r){
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        int rs = 0;
+        try {
+            conn = ConnectionManager.getConnection();
+            pstm = conn.prepareStatement("update ROOMS set TYPE_ID=?,STATUS=? where ROOM_ID=?");
+            pstm.setString(3, r.getROOM_ID());
+            pstm.setInt(1, Integer.parseInt(r.getTYPE_ID()));
+            pstm.setBoolean(2, r.isSTATUS());
+            rs=pstm.executeUpdate();
+            if(rs==0) return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }finally{
+            ConnectionManager.closeAll(conn, pstm, null);
+        }
+        return true;
+    }
+    
+    public static boolean deleteRoomByID(String id){
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        int rs = 0;
+        try {
+            conn = ConnectionManager.getConnection();
+            pstm = conn.prepareStatement("delete from ROOMS where ROOM_ID=?");
+            pstm.setString(1, id);
+            rs=pstm.executeUpdate();
+            if(rs==0) return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }finally{
+            ConnectionManager.closeAll(conn, pstm, null);
+        }
+        return true;
     }
 
     public static Vector convertRoomToVector(Room r) {
