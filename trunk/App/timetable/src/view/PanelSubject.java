@@ -40,6 +40,7 @@ public class PanelSubject extends javax.swing.JPanel {
         cbbSubjectSearch.addElement("Tên môn học");
         cbbSubjectSearch.addElement("Bộ môn");
         jComboSearch.setModel(cbbSubjectSearch);
+        setTextField(false);
     }
 
     /**
@@ -164,15 +165,9 @@ public class PanelSubject extends javax.swing.JPanel {
 
         jLabel2.setText("Tên Môn Học");
 
-        jtxtSubjectName.setEnabled(false);
-
         jLabel3.setText("Bộ Môn");
 
         jLabel5.setText("Mã Môn Học");
-
-        jtxtSubjectID.setEnabled(false);
-
-        jtxtMaster.setEnabled(false);
 
         jButton1.setText("xóa nhanh chi tiết");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -329,7 +324,7 @@ public class PanelSubject extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+//nút chỉnh sửa
     private void jBEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditActionPerformed
         jBadd.setEnabled(false);
         jBEdit.setEnabled(false);
@@ -337,7 +332,7 @@ public class PanelSubject extends javax.swing.JPanel {
         jBSave.setEnabled(true);
         jBCancel.setEnabled(true);
         setTextField(true);
-        jtxtSubjectID.setEnabled(true);
+        jtxtSubjectID.setEditable(true);
 //        setTextFieldtoNull();
         Edit = true;
 //        int index = jTable1.getSelectedRow();
@@ -359,7 +354,7 @@ public class PanelSubject extends javax.swing.JPanel {
     private void jComboSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboSearchActionPerformed
-
+// nút Search
     private void jBSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSearchActionPerformed
         reset();
         dtbm.addColumn("Mã Môn Học");
@@ -415,7 +410,7 @@ public class PanelSubject extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_jBSearchActionPerformed
-
+// Nút thêm
     private void jBaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaddActionPerformed
         jBadd.setEnabled(false);
         jBEdit.setEnabled(false);
@@ -426,7 +421,7 @@ public class PanelSubject extends javax.swing.JPanel {
         setTextFieldtoNull();
         Insert = true;
     }//GEN-LAST:event_jBaddActionPerformed
-
+//
     private void jBCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelActionPerformed
 //        setTextFieldtoNull();
         jBadd.setEnabled(true);
@@ -438,7 +433,7 @@ public class PanelSubject extends javax.swing.JPanel {
         Edit = false;
         Insert = false;
     }//GEN-LAST:event_jBCancelActionPerformed
-
+//nút save
     private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
         if (Edit) {
             editSubject();
@@ -451,7 +446,7 @@ public class PanelSubject extends javax.swing.JPanel {
             LoadTable();
         }
     }//GEN-LAST:event_jBSaveActionPerformed
-
+// nút xóa
     private void jBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteActionPerformed
         jBadd.setEnabled(true);
         jBEdit.setEnabled(true);
@@ -460,10 +455,16 @@ public class PanelSubject extends javax.swing.JPanel {
         jBCancel.setEnabled(false);
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa môn học có mã môn học là " + jtxtSubjectID.getText() + "?", "Cảnh Báo", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
+            if(SubjectManager.checkSubjectID(jtxtSubjectID.getText())){
             SubjectManager.DeleteSubject(jtxtSubjectID.getText());
             setTextFieldtoNull();
             reset();
             LoadTable();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Mã môn học không tồn tại");
+            }
         }
     }//GEN-LAST:event_jBDeleteActionPerformed
 
@@ -471,7 +472,7 @@ public class PanelSubject extends javax.swing.JPanel {
         reset();
         LoadTable();
     }//GEN-LAST:event_jBReloadActionPerformed
-
+//click chuột vào bảng để lấy dữ liệu ra textfield
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int index = jTable1.getSelectedRow();
         Vector Row = (Vector) dtbm.getDataVector().get(index);
@@ -483,12 +484,13 @@ public class PanelSubject extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     setTextFieldtoNull();
     }//GEN-LAST:event_jButton1ActionPerformed
+   //lấy dẽ liệu ra textfield
     private void loadtoTextField(Subject subject) {
         jtxtSubjectID.setText(subject.getSUBJECT_ID());
         jtxtMaster.setText(subject.getMASTER_SUBJECT());
         jtxtSubjectName.setText(subject.getSUBJECT_NAME());
     }
-
+// hiển thị bảng
     public void LoadTable() {
         List<Subject> list = new ArrayList<>();
         dtbm.addColumn("Mã Môn Học");
@@ -508,24 +510,24 @@ public class PanelSubject extends javax.swing.JPanel {
             Logger.getLogger(PanelRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+// hàm reset để bảng trở về mặc định
     private void reset() {
         dtbm.setRowCount(0);
         dtbm.setColumnCount(0);
     }
-
+//hàm thiết lập cho phép chỉnh sửa các textfield
     private void setTextField(boolean settextfield) {
-        jtxtSubjectID.setEnabled(settextfield);
-        jtxtSubjectName.setEnabled(settextfield);
-        jtxtMaster.setEnabled(settextfield);
+        jtxtSubjectID.setEditable(settextfield);
+        jtxtSubjectName.setEditable(settextfield);
+        jtxtMaster.setEditable(settextfield);
     }
-
+//xóa nhanh dữ liệu có trong textfied
     private void setTextFieldtoNull() {
         jtxtMaster.setText("");
         jtxtSubjectID.setText("");
         jtxtSubjectName.setText("");
     }
-
+//check valid ,kiểm tra lỗi người dùng nhập vào textfield
     private String checkTextField() {
         String Error = "";
         if (jtxtSubjectID.getText().equals("")) {
@@ -539,7 +541,7 @@ public class PanelSubject extends javax.swing.JPanel {
         }
         return Error;
     }
-
+//hàm thêm môn học,đồng thời kiểm tra môn học đã tồn tại hay chưa
     private void insertSubject() {
         String Error = checkTextField();
         String Error2 = "";
@@ -568,7 +570,7 @@ public class PanelSubject extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, Error);
         }
     }
-
+//hàm chỉnh sửa,không cho phép chỉnh sửa môn học không tồn tại
     private void editSubject() {
         Subject item = SubjectManager.GetSubjectbyID(jtxtSubjectID.getText());
         String Older = "";

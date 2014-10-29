@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-
 
 /**
  *
@@ -21,31 +19,45 @@ public class frmMain extends javax.swing.JFrame {
     /**
      * Creates new form frmMain
      */
+    private boolean isAdmin = false;
+
     public frmMain() {
-        initComponents();
-        initTabPanel();   
     }
-    public frmMain(boolean isAdmin) {
+
+    public frmMain(String user) {
         initComponents();
-        initTabPanel();   
+        initTabPanel();
+        lblUserName.setText(user);
+    }
+
+    public frmMain(boolean isAdmin, String user) {
+        this.isAdmin = true;
+        initComponents();
+        initTabPanel();
+        lblUserName.setText(user);
     }
 
     private void initTabPanel() {
         //
         PanelRoom pnr = new PanelRoom();
         tbnPanel.addTab("ROOM", pnr);
-        
+
         PanelSubject pns = new PanelSubject();
         tbnPanel.addTab("SUBJECT", pns);
-        
+
         PanelTimeTable pntt = new PanelTimeTable();
         tbnPanel.addTab("TIME TABLE", pntt);
-        
-        PanelUser pnu = new PanelUser();
-        tbnPanel.addTab("USERS", pnu);
-        
+
+        if (isAdmin) {
+            PanelUser pnu = new PanelUser();
+            tbnPanel.addTab("USERS", pnu);
+        }
+
         PanelDevice pnd = new PanelDevice();
         tbnPanel.addTab("DEVICES", pnd);
+
+        PanelDeviceInRoom pndir = new PanelDeviceInRoom();
+        tbnPanel.add("DEVICES IN ROOM", pndir);
     }
 
     /**
@@ -60,6 +72,8 @@ public class frmMain extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlBanner = new javax.swing.JPanel();
         lblBannerImg = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbnPanel = new javax.swing.JTabbedPane();
         menuMain = new javax.swing.JMenuBar();
@@ -69,12 +83,22 @@ public class frmMain extends javax.swing.JFrame {
         menuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(2147483647, 2147483647));
 
         pnlBanner.setBackground(new java.awt.Color(255, 255, 255));
         pnlBanner.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBannerImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Fotor01021103644.png"))); // NOI18N
         pnlBanner.add(lblBannerImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        lblUserName.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
+        lblUserName.setForeground(java.awt.Color.blue);
+        lblUserName.setText("user");
+        pnlBanner.add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 60, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("Hello");
+        pnlBanner.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 60, -1, -1));
 
         jScrollPane1.setViewportView(tbnPanel);
 
@@ -107,7 +131,7 @@ public class frmMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBanner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBanner, javax.swing.GroupLayout.DEFAULT_SIZE, 1265, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
@@ -140,7 +164,7 @@ public class frmMain extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -152,9 +176,11 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblBannerImg;
+    private javax.swing.JLabel lblUserName;
     private javax.swing.JMenu menuHelp;
     private javax.swing.JMenuItem menuIExit;
     private javax.swing.JMenuItem menuILogout;

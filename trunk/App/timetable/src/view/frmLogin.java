@@ -155,7 +155,11 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if (CheckLogin.check(txtUserName.getText(), new String(txtPassword.getPassword()))) {
-            frmMain frmMainForm = new frmMain(true);
+            frmMain frmMainForm = null;
+            if (CheckLogin.isAdmin(txtUserName.getText())) {
+                frmMainForm = new frmMain(true,txtUserName.getText());
+            }else
+                frmMainForm = new frmMain(txtUserName.getText());
             frmMainForm.setVisible(true);
             this.dispose();
         } else {
