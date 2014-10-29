@@ -6,9 +6,12 @@
 package view;
 
 import control.UserManager;
+import java.awt.Button;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.User;
@@ -25,9 +28,12 @@ public class PanelUser extends javax.swing.JPanel {
     DefaultTableModel dtbm = new DefaultTableModel();
     boolean Insert;
     boolean Edit;
+    ButtonGroup bg = new ButtonGroup();
 
     public PanelUser() {
         initComponents();
+        bg.add(jadmin);
+        bg.add(juser);
 // hiển thị dữ liệu ra bảng
         dtbm.addColumn("Tài Khoản");
         dtbm.addColumn("Họ Tên");
@@ -36,6 +42,7 @@ public class PanelUser extends javax.swing.JPanel {
         dtbm.addColumn("Admin");
         reset();
         loadTable();
+        SetTextFeild(false);
     }
 
     /**
@@ -91,23 +98,15 @@ public class PanelUser extends javax.swing.JPanel {
 
         jLabel1.setText("UserName");
 
-        jtxtUser.setEnabled(false);
-
         jLabel2.setText("Password");
 
         jLabel4.setText("Full Name");
 
-        jtxtName.setEnabled(false);
-
         jLabel3.setText("Phone");
-
-        jtxtPhone.setEnabled(false);
 
         jLabel5.setText("Address");
 
         jLabel6.setText("Admin");
-
-        jPass.setEnabled(false);
 
         jadmin.setText("TRUE");
         jadmin.setEnabled(false);
@@ -117,15 +116,13 @@ public class PanelUser extends javax.swing.JPanel {
             }
         });
 
-        juser.setText("FLASE");
+        juser.setText("FALSE");
         juser.setEnabled(false);
         juser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 juserMouseClicked(evt);
             }
         });
-
-        jTextField1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -322,7 +319,7 @@ public class PanelUser extends javax.swing.JPanel {
         jbDelete.setEnabled(false);
         SetSaveCancelButton();
         SetTextFeild(true);
-        jtxtUser.setEnabled(false);
+        jtxtUser.setEditable(true);
         Edit = true;
 
     }//GEN-LAST:event_jbEditActionPerformed
@@ -404,27 +401,36 @@ public class PanelUser extends javax.swing.JPanel {
         }
     }
 
-    private void SetTextFeild(boolean temp) {
-        if (temp == true) {
-            jtxtName.setEnabled(true);
-            jPass.setEnabled(true);
-            jtxtPhone.setEnabled(true);
-            jtxtUser.setEnabled(true);
-            jTextField1.setEnabled(true);
-            jadmin.setEnabled(true);
-            juser.setEnabled(true);
-        } else {
-            jtxtName.setEnabled(false);
-            jPass.setEnabled(false);
-            jtxtPhone.setEnabled(false);
-            jtxtUser.setEnabled(false);
-            jTextField1.setEnabled(false);
-            jadmin.setEnabled(false);
-            juser.setEnabled(false);
+//    private void SetTextFeild(boolean temp) {
+//        if (temp == true) {
+//            jtxtName.setEnabled(true);
+//            jPass.setEnabled(true);
+//            jtxtPhone.setEnabled(true);
+//            jtxtUser.setEnabled(true);
+//            jTextField1.setEnabled(true);
+//            jadmin.setEnabled(true);
+//            juser.setEnabled(true);
+//        } else {
+//            jtxtName.setEnabled(false);
+//            jPass.setEnabled(false);
+//            jtxtPhone.setEnabled(false);
+//            jtxtUser.setEnabled(false);
+//            jTextField1.setEnabled(false);
+//            jadmin.setEnabled(false);
+//            juser.setEnabled(false);
+//        }
+//
+//    }
+    
+        private void SetTextFeild(boolean temp) {
+            jtxtName.setEditable(temp);
+            jPass.setEditable(temp);
+            jtxtPhone.setEditable(temp);
+            jtxtUser.setEditable(temp);
+            jTextField1.setEditable(temp);
+            jadmin.setEnabled(temp);
+            juser.setEnabled(temp);
         }
-
-    }
-
     private void SetTextFeildNull() {
         jtxtName.setText("");
         jPass.setText("");
@@ -452,18 +458,25 @@ public class PanelUser extends javax.swing.JPanel {
             Error = Error + "FullNam không được để trống \n";
         }
         String phone = jtxtPhone.getText();
+        if(phone.equals(""))
+        {}
+        else
+        {
         try {
             int a = Integer.parseInt(phone);
         } catch (NumberFormatException e) {
             kt = false;
         }
-
-        if (jtxtPhone.getText().equals("") || (kt == false)) {
-            Error = Error + "Phone không được để trông và phải nhập số\n ";
+        if (kt == false) {
+            Error = Error + "Số điện thoại phải nhập số\n ";
         }
-        if (jTextField1.getText().equals("")) {
-            Error = Error + "Address không được để trống\n";
         }
+//        if (jtxtPhone.getText().equals("") || (kt == false)) {
+//            Error = Error + "Phone không được để trông và phải nhập số\n ";
+//        }
+//        if (jTextField1.getText().equals("")) {
+//            Error = Error + "Address không được để trống\n";
+//        }
         return Error;
     }
 
@@ -515,6 +528,10 @@ public class PanelUser extends javax.swing.JPanel {
                 if (temp) {
                     JOptionPane.showMessageDialog(this, "Thành Công");
                 }
+            }
+            else
+            {
+            JOptionPane.showMessageDialog(this, "User không tồn tại");
             }
         } else {
             JOptionPane.showMessageDialog(this, Error);

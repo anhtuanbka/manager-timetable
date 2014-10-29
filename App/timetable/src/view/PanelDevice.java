@@ -47,7 +47,6 @@ public class PanelDevice extends javax.swing.JPanel {
         txtDeviceID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnInsert = new javax.swing.JButton();
-        btnViewDevices = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
@@ -67,6 +66,8 @@ public class PanelDevice extends javax.swing.JPanel {
         txtaDesciption.setRows(5);
         jScrollPane1.setViewportView(txtaDesciption);
 
+        txtDeviceID.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Devive ID");
 
@@ -75,15 +76,6 @@ public class PanelDevice extends javax.swing.JPanel {
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertActionPerformed(evt);
-            }
-        });
-
-        btnViewDevices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Data-View-Details-icon.png"))); // NOI18N
-        btnViewDevices.setText("View Devices");
-        btnViewDevices.setEnabled(false);
-        btnViewDevices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewDevicesActionPerformed(evt);
             }
         });
 
@@ -131,18 +123,15 @@ public class PanelDevice extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnInsert)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDelete))
-                            .addComponent(btnViewDevices))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUpdate)
-                            .addComponent(btnReset))))
-                .addGap(6, 6, 6))
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInsert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,13 +153,12 @@ public class PanelDevice extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnDelete)
                                     .addComponent(btnInsert)
-                                    .addComponent(btnUpdate))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btnReset))
+                                .addGap(15, 15, 15)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnReset)
-                                    .addComponent(btnViewDevices))))))
+                                    .addComponent(btnDelete)
+                                    .addComponent(btnUpdate))))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -210,18 +198,20 @@ public class PanelDevice extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -230,8 +220,8 @@ public class PanelDevice extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -275,16 +265,11 @@ public class PanelDevice extends javax.swing.JPanel {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
-        btnViewDevices.setEnabled(false);
         tblDevices.clearSelection();
         txtDeviceID.setText("");
         txtDeviceName.setText("");
         txtaDesciption.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
-
-    private void btnViewDevicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDevicesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewDevicesActionPerformed
 
     private void tblDevicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDevicesMouseClicked
         loadDataToControl();
@@ -300,7 +285,6 @@ public class PanelDevice extends javax.swing.JPanel {
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton btnViewDevices;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -338,6 +322,5 @@ public class PanelDevice extends javax.swing.JPanel {
         txtaDesciption.setText(d.getDescription());
         btnDelete.setEnabled(true);
         btnUpdate.setEnabled(true);
-        btnViewDevices.setEnabled(true);
     }
 }

@@ -5,16 +5,10 @@
  */
 package view;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-import control.DevicesManager;
 import control.RoomManager;
 import java.awt.event.KeyEvent;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -94,9 +88,6 @@ public final class PanelRoom extends javax.swing.JPanel {
             }
         });
         tblRoomList.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tblRoomListKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tblRoomListKeyReleased(evt);
             }
@@ -149,7 +140,8 @@ public final class PanelRoom extends javax.swing.JPanel {
                     .addComponent(cbbStatus4S, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane2.getAccessibleContext().setAccessibleParent(jScrollPane2);
@@ -203,6 +195,11 @@ public final class PanelRoom extends javax.swing.JPanel {
 
         btnViewDevices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Data-View-Details-icon.png"))); // NOI18N
         btnViewDevices.setText("View Devices");
+        btnViewDevices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDevicesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -266,8 +263,10 @@ public final class PanelRoom extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -275,9 +274,9 @@ public final class PanelRoom extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName(" Room List");
@@ -306,7 +305,7 @@ public final class PanelRoom extends javax.swing.JPanel {
         dtbm.addColumn("Phòng Học");
         dtbm.addColumn("Kiểu Phòng");
         dtbm.addColumn("Trạng Thái");
-        List<Room> list = new ArrayList<>();
+        List<Room> list = new ArrayList<Room>();
         list = RoomManager.searchRooms(txtSearch.getText(), roomtype, status);
         for (Room room : list) {
             dtbm.addRow(RoomManager.convertRoomToVector(room));
@@ -320,7 +319,7 @@ public final class PanelRoom extends javax.swing.JPanel {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         txtRoomID.setText("");
-       // txtRoomID.setEditable(true);
+        // txtRoomID.setEditable(true);
         cbbRoomType.setSelectedIndex(0);
         cbStatus.setSelected(false);
         btnDelete.setEnabled(false);
@@ -328,12 +327,6 @@ public final class PanelRoom extends javax.swing.JPanel {
         btnViewDevices.setEnabled(false);
         tblRoomList.clearSelection();
     }//GEN-LAST:event_btnResetActionPerformed
-
-    private void tblRoomListKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblRoomListKeyPressed
-//        if ((evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
-//            loadDataToControl();
-//        }
-    }//GEN-LAST:event_tblRoomListKeyPressed
 
     private void tblRoomListKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblRoomListKeyReleased
         if ((evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
@@ -343,6 +336,7 @@ public final class PanelRoom extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         if (tblRoomList.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row before update");
             return;
         }
         if (!isRoomValidated()) {
@@ -370,7 +364,7 @@ public final class PanelRoom extends javax.swing.JPanel {
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnSearchActionPerformed(null);
         }
     }//GEN-LAST:event_txtSearchKeyPressed
@@ -379,12 +373,17 @@ public final class PanelRoom extends javax.swing.JPanel {
         if (tblRoomList.getSelectedRows().length == 0) {
             return;
         }
-        if(JOptionPane.showConfirmDialog(null, "Are u sure?")==JOptionPane.YES_OPTION){
+        if (JOptionPane.showConfirmDialog(null, "Are u sure?") == JOptionPane.YES_OPTION) {
             RoomManager.deleteRoomByID(txtRoomID.getText());
             loadDataRoomTable("", "");
         }
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnViewDevicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDevicesActionPerformed
+        dlgDeviceInRoom dlgDIR = new dlgDeviceInRoom(null, true, txtRoomID.getText());
+        dlgDIR.setVisible(true);
+    }//GEN-LAST:event_btnViewDevicesActionPerformed
     public void initData() {
         List<Room> list = new ArrayList<>();
         List<RoomType> listType = new ArrayList<>();
@@ -478,7 +477,7 @@ public final class PanelRoom extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Room ID is null or empty");
             return false;
         }
-        if (cbbRoomType.getSelectedIndex() > 0) {
+        if (cbbRoomType.getSelectedIndex() <1) {
             JOptionPane.showMessageDialog(null, "Room type is invalid");
             return false;
         }

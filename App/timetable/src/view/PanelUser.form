@@ -190,9 +190,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtxtUser">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -205,9 +202,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtxtName">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -215,9 +209,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtxtPhone">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -230,9 +221,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPass">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jadmin">
           <Properties>
@@ -245,7 +233,7 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="juser">
           <Properties>
-            <Property name="text" type="java.lang.String" value="FLASE"/>
+            <Property name="text" type="java.lang.String" value="FALSE"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -253,9 +241,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
